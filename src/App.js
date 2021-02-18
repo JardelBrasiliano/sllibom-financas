@@ -2,12 +2,13 @@ import React from 'react';
 
 import Routes from './router';
 
-import { EstiloGlobal } from './reset.js';
+import EstiloGlobal from './styles/reset';
 
-const App = () => {
-  return <>
+const App = () => (
+  <>
     <EstiloGlobal />
-    <Routes /></>;
-}
+    <Routes />
+  </>
+);
 
 export default App;
