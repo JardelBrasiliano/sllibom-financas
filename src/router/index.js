@@ -6,7 +6,7 @@ import PaginaInicial from '../pages/PaginaInicial';
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={PaginaInicial} />
+        <Route path="/" exact component={PaginaInicial} />
     </Switch>
   </BrowserRouter>
 );
