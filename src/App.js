@@ -1,11 +1,11 @@
 import React from 'react';
 
-function App() {
-  return (
-    <div>
-      <h1>teste</h1>
-    </div>
-  );
+import Routes from './router';
+
+import './reset.css';
+
+const App = () => {
+  return <Routes />;
 }
 
 export default App;
