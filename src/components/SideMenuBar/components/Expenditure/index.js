@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
+import Input from '@material-ui/core/Input';
+
+import InputTag from '../../../InputTag';
+
 import {
   ExpenditureContainer,
   ExpenditureContent,
@@ -15,7 +20,8 @@ const Expenditure = ({ setOpenExpenditure }) => {
   const [wasPaid, setWaspaid] = useState(true);
   const [today, setToday] = useState(false);
   const [anotherDate, setAnotherDate] = useState('');
-
+  const [tag, setTag] = useState('');
+  console.log(typeof setTag, tag);
   const changeToday = () => {
     setAnotherDate('');
 
@@ -45,7 +51,10 @@ const Expenditure = ({ setOpenExpenditure }) => {
 
           <Value>
             <p>R$</p>
-            <input
+            <Input
+              fullWidth
+              color="secondary"
+              className="InputValue"
               type="text"
               placeholder="0,00"
               value={value}
@@ -84,6 +93,9 @@ const Expenditure = ({ setOpenExpenditure }) => {
               }}
             />
           </GetDate>
+
+          <InputTag setTag={setTag} />
+
           <BtnSaveContainer>
             <BtnSave
               className={value && (today || anotherDate !== '') ? 'active' : ''}

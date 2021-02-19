@@ -58,18 +58,22 @@ export const Value = styled.div`
 
   width: 90%;
   margin-top: 40px;
+  > p {
+    position: absolute;
 
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  color: #a0a0a0;
+    font-size: 20px;
+    color: #a0a0a0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
-  border-bottom: 1px solid rgba(88, 88, 88, 0.94);
-  > input {
-    margin-left: 15px;
+  > .InputValue {
     border: none;
     background-color: transparent;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
+
+    background: no-repeat scroll 7px 7px;
+    padding-left: 35px;
   }
 `;
 

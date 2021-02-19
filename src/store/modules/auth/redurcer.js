@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   token: null,
 };
 
-const auth = (state = INITIAL_STATE, action) => {
+const expenditure = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.LOGOUT.SUCCESS:
       return {
@@ -42,4 +42,4 @@ const auth = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default auth;
+export default expenditure;

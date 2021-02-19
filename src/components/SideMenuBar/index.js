@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Link } from 'react-router-dom';
 
-import Expenditure from './Expenditure';
+import Expenditure from './components/Expenditure';
 
 import {
   SideMenuContainer,
@@ -17,7 +17,7 @@ import logo from '../../assets/logo.svg';
 
 const SideMenuBar = () => {
   const [open, setOpen] = useState(false);
-  const [openExpenditure, setOpenExpenditure] = useState(true);
+  const [openExpenditure, setOpenExpenditure] = useState(true); // << Mudar para false
   const [openRecipe, setOpenRecipe] = useState(false);
 
   const handleClick = () => {
