@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { cadastrarEmEspera } from '../../../../store/modules/cadastro/actions';
+
 import {
   RedeSocial,
   Input,
@@ -11,6 +14,14 @@ const Cadastrar = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+
+  const { loadingregisterRequest } = useSelector((state) => state.cadastro);
+
+  const dispatch = useDispatch();
+
+  const fazerCadastro = () => {
+    dispatch(cadastrarEmEspera(nome, email, senha));
+  };
 
   return (
     <>
@@ -58,7 +69,14 @@ const Cadastrar = () => {
           <div />
         </Input>
       </InputContainer>
-      <BtnEntrarOuCadastrar>CADASTRAR</BtnEntrarOuCadastrar>
+
+      {!loadingregisterRequest ? (
+        <BtnEntrarOuCadastrar onClick={() => fazerCadastro()}>
+          CADASTRAR
+        </BtnEntrarOuCadastrar>
+      ) : (
+        '...'
+      )}
     </>
   );
 };

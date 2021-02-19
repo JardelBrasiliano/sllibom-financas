@@ -1,4 +1,3 @@
-
 // import { createStore } from "redux";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -12,7 +11,7 @@ import rootSaga from './modules/rootSaga';
 const persistConfig = {
   key: 'mobills',
   storage,
-  whitelist: ['auth'],
+  whitelist: ['autenticacao'],
 };
 
 const sagaMiddleware = createSagaMiddleware();

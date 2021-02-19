@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { EntrarEmEspera } from '../../../../store/modules/autenticacao/actions';
+
 import {
   RedeSocial,
   Input,
@@ -10,6 +13,10 @@ import {
 const Entrar = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+
+  const { loadingSignInRequest } = useSelector((state) => state.autenticacao);
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -46,7 +53,15 @@ const Entrar = () => {
         </Input>
       </InputContainer>
 
-      <BtnEntrarOuCadastrar>ENTRAR</BtnEntrarOuCadastrar>
+      {!loadingSignInRequest ? (
+        <BtnEntrarOuCadastrar
+          onClick={() => dispatch(EntrarEmEspera(email, senha))}
+        >
+          ENTRAR
+        </BtnEntrarOuCadastrar>
+      ) : (
+        '...'
+      )}
     </>
   );
 };
