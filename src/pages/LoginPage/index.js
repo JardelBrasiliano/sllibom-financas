@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import SignIn from './components/SignIn';
 import Register from './components/Register';
@@ -10,8 +12,12 @@ import initiation from '../../assets/home-page.png';
 
 const LoginPage = () => {
   const [active, setActive] = useState(true);
+
+  const { isSignedIn } = useSelector((state) => state.auth);
+
   return (
     <>
+      {isSignedIn > 0 ? <Redirect to="/dashboard" /> : null}
       <Header className="header-container">
         <div className="header-content">
           <img className="header-img" src={logo} alt="" />

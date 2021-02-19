@@ -6,12 +6,22 @@ import rsf from '../../../services/configFirebase';
 export function* singIn({ payload }) {
   try {
     const { email, password } = payload;
+
     const { user } = yield call(
       rsf.auth.signInWithEmailAndPassword,
       email,
       password,
     );
-    yield put(actions.signInSuccess(user.uid, email));
+
+    const snapshot = yield call(rsf.firestore.getDocument, `users/${user.uid}`);
+    const resUser = snapshot.data();
+
+    const person = {
+      name: resUser.name,
+      email: resUser.email,
+    };
+
+    yield put(actions.signInSuccess(user.uid, person));
   } catch (error) {
     actions.signInFailure();
   }

@@ -11,7 +11,7 @@ import rootSaga from './modules/rootSaga';
 const persistConfig = {
   key: 'mobills',
   storage,
-  whitelist: ['autenticacao'],
+  whitelist: ['auth'],
 };
 
 const sagaMiddleware = createSagaMiddleware();

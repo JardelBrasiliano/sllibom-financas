@@ -5,9 +5,18 @@ import rsf from '../../../services/configFirebase';
 
 export function* newRegistrationWithEmailPassword({ payload }) {
   try {
-    const { email, password } = payload;
+    const { name, email, password } = payload;
 
-    yield call(rsf.auth.createUserWithEmailAndPassword, email, password);
+    const { user } = yield call(
+      rsf.auth.createUserWithEmailAndPassword,
+      email,
+      password,
+    );
+
+    yield call(rsf.firestore.setDocument, `users/${user.uid}`, {
+      name,
+      email,
+    });
 
     yield actions.registerSuccess();
   } catch (err) {

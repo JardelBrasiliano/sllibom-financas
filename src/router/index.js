@@ -7,6 +7,8 @@ const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={LoginPage} />
+
+      <Route component={() => <h1>Página não encontrada</h1>} />
     </Switch>
   </BrowserRouter>
 );
