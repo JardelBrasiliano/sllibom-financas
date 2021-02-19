@@ -34,6 +34,41 @@ export const Header = styled.header`
     color: #2962ff;
   }
 `;
+export const BtnContainer = styled.div`
+  position: relative;
+
+  > .btnModal {
+    position: absolute;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    top: 10px;
+    left: 0;
+
+    width: 250px;
+    height: 100px;
+    border-radius: 30px;
+    background-color: #fff;
+    -webkit-box-shadow: 0px 0px 7px 0px #000000;
+    box-shadow: 0px 0px 7px 0px #000000;
+  }
+`;
+export const BtnAction = styled.button`
+  cursor: pointer;
+  height: 50%;
+  width: 100%;
+  border: none;
+  background-color: #fff;
+
+  transition: 0.2s ease-in-out background-color;
+
+  &:hover {
+    background-color: #f2f2f0;
+  }
+`;
 
 export const BtnAdd = styled.button`
   cursor: pointer;
