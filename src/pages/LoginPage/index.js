@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import SignIn from './components/SignIn';
-import Register from './components/Register';
+import SignIn from '../../components/SignIn';
+import Register from '../../components/Register';
 
 import { Header, Main, Action, SignInOrRegister, InputControl } from './style';
 
@@ -17,7 +17,7 @@ const LoginPage = () => {
 
   return (
     <>
-      {isSignedIn > 0 ? <Redirect to="/dashboard" /> : null}
+      {isSignedIn > 0 ? <Redirect to="/profile" /> : null}
       <Header className="header-container">
         <div className="header-content">
           <img className="header-img" src={logo} alt="" />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerRequest } from '../../../../store/modules/register/actions';
+import { registerRequest } from '../../store/modules/register/actions';
 
 import {
   SocialMedia,
@@ -8,7 +8,7 @@ import {
   Division,
   BtnSignInOrRegister,
   InputContainer,
-} from '../../style';
+} from '../../pages/LoginPage/style';
 
 const Cadastrar = () => {
   const [name, setName] = useState('');

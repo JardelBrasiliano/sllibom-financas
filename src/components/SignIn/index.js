@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInRequest } from '../../../../store/modules/auth/actions';
+import { signInRequest } from '../../store/modules/auth/actions';
 
 import {
   SocialMedia,
@@ -8,7 +8,7 @@ import {
   Division,
   BtnSignInOrRegister,
   InputContainer,
-} from '../../style';
+} from '../../pages/LoginPage/style';
 
 const Entrar = () => {
   const [email, setEmail] = useState('');
