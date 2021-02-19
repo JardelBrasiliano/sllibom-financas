@@ -26,7 +26,13 @@ const SideMenuBar = () => (
             <Link to="/dashboard">Dashboard</Link>
           </li>
           <li>
-            <Link to="/">Sair</Link>
+            <button
+              className="btnNav"
+              type="button"
+              onClick={() => console.log('oi')}
+            >
+              Sair
+            </button>
           </li>
         </ul>
       </Navigation>

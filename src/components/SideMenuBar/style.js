@@ -90,10 +90,11 @@ export const Navigation = styled.nav`
   > ul {
     > li {
       background-color: #fff;
+
       transition: 0.2s ease-in-out background-color;
 
       &:hover {
-        background-color: #e8e8e8;
+        background-color: #f2f2f0;
       }
       > a {
         display: flex;
@@ -104,6 +105,24 @@ export const Navigation = styled.nav`
         height: 45px;
 
         padding-bottom: 5px;
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 18px;
+        color: black;
+        text-decoration: none;
+      }
+      > button {
+        cursor: pointer;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        width: 100%;
+        height: 45px;
+        border: none;
+
+        padding-bottom: 5px;
+        background-color: transparent;
 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 18px;
