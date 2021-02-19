@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
 
-import Entrar from './components/Entrar';
-import Cadastrar from './components/Cadastrar';
+import SignIn from './components/SignIn';
+import Register from './components/Register';
 
-import {
-  Header,
-  Main,
-  Acao,
-  EntrarOuCadastrar,
-  ControleDeEntrada,
-} from './style';
+import { Header, Main, Action, SignInOrRegister, InputControl } from './style';
 
 import logo from '../../assets/logo.svg';
-import inicio from '../../assets/home-page.png';
+import initiation from '../../assets/home-page.png';
 
-const PaginaInicial = () => {
-  const [ativo, setAtivo] = useState(true);
+const LoginPage = () => {
+  const [active, setActive] = useState(true);
   return (
     <>
       <Header className="header-container">
@@ -26,41 +20,41 @@ const PaginaInicial = () => {
       </Header>
 
       <Main>
-        <Acao>
+        <Action>
           <div>
             <h2>Hora de transformar suas finanças.</h2>
-            <img src={inicio} alt="" />
+            <img src={initiation} alt="" />
             <p>
               O caminho está a sua frente. Você já deu seu primeiro passo rumo à
               transformação financeira e nós te guiaremos nessa jornada.
             </p>
           </div>
-        </Acao>
+        </Action>
 
-        <EntrarOuCadastrar>
+        <SignInOrRegister>
           <div className="entrar-content">
-            <ControleDeEntrada>
+            <InputControl>
               <button
                 type="button"
-                className={ativo ? 'ativo' : ''}
-                onClick={() => setAtivo(!ativo)}
+                className={active ? 'active' : ''}
+                onClick={() => setActive(!active)}
               >
                 ENTRAR
               </button>
               <button
                 type="button"
-                className={ativo ? '' : 'ativo'}
-                onClick={() => setAtivo(!ativo)}
+                className={active ? '' : 'active'}
+                onClick={() => setActive(!active)}
               >
                 CADASTRAR
               </button>
-            </ControleDeEntrada>
-            {ativo ? <Entrar /> : <Cadastrar />}
+            </InputControl>
+            {active ? <SignIn /> : <Register />}
           </div>
-        </EntrarOuCadastrar>
+        </SignInOrRegister>
       </Main>
     </>
   );
 };
 
-export default PaginaInicial;
+export default LoginPage;

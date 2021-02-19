@@ -3,17 +3,17 @@ import * as actions from './actions';
 
 import rsf from '../../../services/configFirebase';
 
-export function* Entrar({ payload }) {
+export function* singIn({ payload }) {
   try {
-    const { email, senha } = payload;
+    const { email, password } = payload;
     const { user } = yield call(
       rsf.auth.signInWithEmailAndPassword,
       email,
-      senha,
+      password,
     );
-    yield put(actions.EntrarSucesso(user.uid, email));
+    yield put(actions.signInSuccess(user.uid, email));
   } catch (error) {
-    actions.EntrarErro();
+    actions.signInFailure();
   }
 }
-export default all([takeLatest('@auth/SIGN_IN_REQUEST', Entrar)]);
+export default all([takeLatest('@auth/SIGN_IN_REQUEST', singIn)]);

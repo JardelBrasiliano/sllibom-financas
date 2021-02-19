@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { EntrarEmEspera } from '../../../../store/modules/autenticacao/actions';
+import { signInRequest } from '../../../../store/modules/auth/actions';
 
 import {
-  RedeSocial,
+  SocialMedia,
   Input,
-  Divisao,
-  BtnEntrarOuCadastrar,
+  Division,
+  BtnSignInOrRegister,
   InputContainer,
 } from '../../style';
 
 const Entrar = () => {
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setpassword] = useState('');
 
-  const { loadingSignInRequest } = useSelector((state) => state.autenticacao);
+  const { loadingSignInRequest } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
   return (
     <>
-      <RedeSocial>
+      <SocialMedia>
         <button type="button">Google</button>
         <button type="button">FaceBook</button>
-      </RedeSocial>
+      </SocialMedia>
 
-      <Divisao>ou</Divisao>
+      <Division>ou</Division>
 
       <InputContainer>
         <Input>
@@ -44,9 +44,9 @@ const Entrar = () => {
           <input
             type="password"
             placeholder="Senha"
-            value={senha}
+            value={password}
             onChange={(value) => {
-              setSenha(value.target.value);
+              setpassword(value.target.value);
             }}
           />
           <div />
@@ -54,11 +54,11 @@ const Entrar = () => {
       </InputContainer>
 
       {!loadingSignInRequest ? (
-        <BtnEntrarOuCadastrar
-          onClick={() => dispatch(EntrarEmEspera(email, senha))}
+        <BtnSignInOrRegister
+          onClick={() => dispatch(signInRequest(email, password))}
         >
           ENTRAR
-        </BtnEntrarOuCadastrar>
+        </BtnSignInOrRegister>
       ) : (
         '...'
       )}

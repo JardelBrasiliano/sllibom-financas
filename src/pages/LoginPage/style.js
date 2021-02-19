@@ -41,7 +41,7 @@ export const Main = styled.main`
   justify-content: center;
 `;
 
-export const Acao = styled.section`
+export const Action = styled.section`
   width: 500px;
   height: 100%;
   padding: 0 15px 15px 15px;
@@ -84,7 +84,7 @@ export const Acao = styled.section`
   }
 `;
 
-export const EntrarOuCadastrar = styled.section`
+export const SignInOrRegister = styled.section`
   width: 500px;
   height: 100%;
 
@@ -107,7 +107,7 @@ export const EntrarOuCadastrar = styled.section`
 `;
 /* ENTRAR E CADASTRAR */
 
-export const ControleDeEntrada = styled.div`
+export const InputControl = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,7 +132,7 @@ export const ControleDeEntrada = styled.div`
     font-size: 15px;
     font-weight: bold;
   }
-  > .ativo {
+  > .active {
     &::before {
       content: '';
       position: absolute;
@@ -144,7 +144,7 @@ export const ControleDeEntrada = styled.div`
     }
   }
 `;
-export const RedeSocial = styled.div`
+export const SocialMedia = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,7 +171,7 @@ export const RedeSocial = styled.div`
   }
 `;
 
-export const Divisao = styled.p`
+export const Division = styled.p`
   position: relative;
   margin-bottom: 20px;
 
@@ -232,7 +232,7 @@ export const Input = styled.div`
   }
 `;
 
-export const BtnEntrarOuCadastrar = styled.button`
+export const BtnSignInOrRegister = styled.button`
   cursor: pointer;
   margin: 20px 0 20px 0;
 

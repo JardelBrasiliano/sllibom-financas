@@ -4,8 +4,7 @@ const INITIAL_STATE = {
   loadingregisterRequest: false,
   error: false,
 };
-
-export default function cadastro(state = INITIAL_STATE, action) {
+const register = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.REGISTER.REQUEST:
       return {
@@ -26,4 +25,6 @@ export default function cadastro(state = INITIAL_STATE, action) {
     default:
       return state;
   }
-}
+};
+
+export default register;

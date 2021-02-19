@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   token: null,
 };
 
-export default function autenticacao(state = INITIAL_STATE, action) {
+const auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.LOGOUT.SUCCESS:
       return {
@@ -40,4 +40,6 @@ export default function autenticacao(state = INITIAL_STATE, action) {
     default:
       return state;
   }
-}
+};
+
+export default auth;

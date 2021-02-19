@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import PaginaInicial from '../pages/PaginaInicial';
+import LoginPage from '../pages/LoginPage';
 
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={PaginaInicial} />
+      <Route path="/" exact component={LoginPage} />
     </Switch>
   </BrowserRouter>
 );

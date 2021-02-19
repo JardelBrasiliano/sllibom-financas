@@ -1,45 +1,45 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cadastrarEmEspera } from '../../../../store/modules/cadastro/actions';
+import { registerRequest } from '../../../../store/modules/register/actions';
 
 import {
-  RedeSocial,
+  SocialMedia,
   Input,
-  Divisao,
-  BtnEntrarOuCadastrar,
+  Division,
+  BtnSignInOrRegister,
   InputContainer,
 } from '../../style';
 
 const Cadastrar = () => {
-  const [nome, setNome] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setpassword] = useState('');
 
-  const { loadingregisterRequest } = useSelector((state) => state.cadastro);
+  const { loadingregisterRequest } = useSelector((state) => state.register);
 
   const dispatch = useDispatch();
 
-  const fazerCadastro = () => {
-    dispatch(cadastrarEmEspera(nome, email, senha));
+  const signUp = () => {
+    dispatch(registerRequest(name, email, password));
   };
 
   return (
     <>
-      <RedeSocial>
+      <SocialMedia>
         <button type="button">Google</button>
         <button type="button">FaceBook</button>
-      </RedeSocial>
+      </SocialMedia>
 
-      <Divisao>ou</Divisao>
+      <Division>ou</Division>
 
       <InputContainer>
         <Input>
           <input
             type="text"
             placeholder="Seu nome"
-            value={nome}
+            value={name}
             onChange={(value) => {
-              setNome(value.target.value);
+              setName(value.target.value);
             }}
           />
           <div />
@@ -61,9 +61,9 @@ const Cadastrar = () => {
           <input
             type="password"
             placeholder="Senha"
-            value={senha}
+            value={password}
             onChange={(value) => {
-              setSenha(value.target.value);
+              setpassword(value.target.value);
             }}
           />
           <div />
@@ -71,9 +71,9 @@ const Cadastrar = () => {
       </InputContainer>
 
       {!loadingregisterRequest ? (
-        <BtnEntrarOuCadastrar onClick={() => fazerCadastro()}>
+        <BtnSignInOrRegister onClick={() => signUp()}>
           CADASTRAR
-        </BtnEntrarOuCadastrar>
+        </BtnSignInOrRegister>
       ) : (
         '...'
       )}
