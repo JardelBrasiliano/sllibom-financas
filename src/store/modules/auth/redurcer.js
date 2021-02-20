@@ -23,7 +23,6 @@ const expenditure = (state = INITIAL_STATE, action) => {
         loadingSignInRequest: true,
       };
     case types.LOGIN.SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         loadingSignInRequest: false,

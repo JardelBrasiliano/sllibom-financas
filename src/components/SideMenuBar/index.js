@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Link } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../store/modules/auth/actions';
+
 import ExpenditureOrRecipe from './components/ExpenditureOrRecipe';
 
 import {
@@ -19,6 +22,8 @@ const SideMenuBar = () => {
   const [open, setOpen] = useState(false);
   const [openExpenditure, setOpenExpenditure] = useState(false); // << Mudar para false
   const [openRecipe, setOpenRecipe] = useState(false);
+
+  const dispach = useDispatch();
 
   const handleClick = () => {
     setOpen((prev) => !prev);
@@ -94,7 +99,7 @@ const SideMenuBar = () => {
               <button
                 className="btnNav"
                 type="button"
-                onClick={() => console.log('oi')}
+                onClick={() => dispach(logOut())}
               >
                 Sair
               </button>

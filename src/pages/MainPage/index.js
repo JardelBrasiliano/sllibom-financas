@@ -4,7 +4,8 @@ import { Redirect } from 'react-router-dom';
 
 import HeaderUser from '../../components/HeaderUser';
 import SideMenuBar from '../../components/SideMenuBar';
-import Record from '../../components/Features/Record';
+
+import Features from '../../components/Features';
 
 import { MainContainer, MainSection } from './style';
 
@@ -18,7 +19,7 @@ const MainPage = () => {
         <SideMenuBar />
         <MainSection>
           <HeaderUser />
-          <Record />
+          <Features />
         </MainSection>
       </MainContainer>
     </>

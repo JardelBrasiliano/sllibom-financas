@@ -12,7 +12,7 @@ export function* singIn({ payload }) {
       email,
       password,
     );
-
+    console.log('q', user.uid);
     const snapshot = yield call(rsf.firestore.getDocument, `users/${user.uid}`);
     const resUser = snapshot.data();
 
