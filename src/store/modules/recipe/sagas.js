@@ -3,24 +3,22 @@ import * as actions from './actions';
 
 import rsf from '../../../services/configFirebase';
 
-export function* sendExpenses({ payload }) {
+export function* sendRecipe({ payload }) {
   try {
     const { data, token, shippingDay } = payload;
     const newShippingDay = shippingDay.split('/').join('-');
-
+    console.log('recipe');
     yield call(
       rsf.firestore.setDocument,
-      `expenditure/${token}/dates/${newShippingDay}`,
+      `recipe/${token}/dates/${newShippingDay}`,
       {
         data,
       },
     );
 
-    yield put(actions.submitExpenditureSuccess());
+    yield put(actions.submitRecipeSuccess());
   } catch (error) {
-    actions.submitExpenditureFailure();
+    actions.submitRecipeFailure();
   }
 }
-export default all([
-  takeLatest('@expenditure/EXPENDITURE_REQUEST', sendExpenses),
-]);
+export default all([takeLatest('@recipe/RECIPE_REQUEST', sendRecipe)]);

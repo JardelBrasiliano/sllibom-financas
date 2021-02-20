@@ -1,14 +1,14 @@
 export const types = {
   EXPENDITURE: {
-    REQUEST: '@auth/SIGN_IN_REQUEST',
-    SUCCESS: '@auth/SIGN_IN_SUCCESS',
-    FAILURE: '@auth/SIGN_IN_FAILURE',
+    REQUEST: '@expenditure/EXPENDITURE_REQUEST',
+    SUCCESS: '@expenditure/EXPENDITURE_SUCCESS',
+    FAILURE: '@expenditure/EXPENDITURE_FAILURE',
   },
 };
 
-export const submitExpenditureRequest = (data) => ({
+export const submitExpenditureRequest = (data, token, shippingDay) => ({
   type: types.EXPENDITURE.REQUEST,
-  payload: { data },
+  payload: { data, token, shippingDay },
 });
 
 export const submitExpenditureSuccess = () => ({

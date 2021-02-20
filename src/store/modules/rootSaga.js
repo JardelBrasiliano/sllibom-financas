@@ -2,9 +2,9 @@ import { all } from 'redux-saga/effects';
 
 import auth from './auth/sagas';
 import register from './register/sagas';
-// import despesas from './despesas/sagas';
-// import receitas from './receitas/sagas';
+import expenditure from './expenditure/sagas';
+import recipe from './recipe/sagas';
 
 export default function* rootSaga() {
-  return yield all([auth, register]);
+  return yield all([auth, register, expenditure, recipe]);
 }

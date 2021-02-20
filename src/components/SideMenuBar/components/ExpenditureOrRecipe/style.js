@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ExpenditureContainer = styled.div`
+export const ExpenditureOrRecipeContainer = styled.div`
   position: absolute;
   z-index: 1000;
   width: 100%;
@@ -12,7 +12,7 @@ export const ExpenditureContainer = styled.div`
   background: rgba(0, 0, 0, 0.69);
 `;
 
-export const ExpenditureContent = styled.div`
+export const ExpenditureOrRecipeContent = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
@@ -98,6 +98,29 @@ export const WasPaid = styled.div`
   }
 `;
 
+export const Description = styled.div`
+  display: flex;
+  align-items: inherit;
+  justify-content: flex-start;
+
+  width: 90%;
+  margin-top: 40px;
+  > p {
+    position: absolute;
+
+    font-size: 20px;
+    color: #a0a0a0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  > .InputValue {
+    border: none;
+    background-color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+  }
+`;
+
 export const GetDate = styled.div`
   display: flex;
   align-items: inherit;
@@ -153,6 +176,7 @@ export const BtnSaveContainer = styled.div`
 
 export const BtnSave = styled.button`
   cursor: pointer;
+  pointer-events: none;
   margin: 20px 20px 20px 0;
 
   width: 180px;
@@ -196,6 +220,7 @@ export const BtnSave = styled.button`
     font-size: 20px;
   }
   &.active {
+    pointer-events: all;
     background-color: #2962ff;
   }
   &.active:hover {

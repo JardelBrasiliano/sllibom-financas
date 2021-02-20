@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Link } from 'react-router-dom';
 
-import Expenditure from './components/Expenditure';
+import ExpenditureOrRecipe from './components/ExpenditureOrRecipe';
 
 import {
   SideMenuContainer,
@@ -40,7 +40,16 @@ const SideMenuBar = () => {
   return (
     <>
       {openExpenditure ? (
-        <Expenditure setOpenExpenditure={setOpenExpenditure} />
+        <ExpenditureOrRecipe setOpen={setOpenExpenditure}>
+          Despesas
+        </ExpenditureOrRecipe>
+      ) : (
+        ''
+      )}
+      {openRecipe ? (
+        <ExpenditureOrRecipe setOpen={setOpenRecipe} isRecipe>
+          Receita
+        </ExpenditureOrRecipe>
       ) : (
         ''
       )}

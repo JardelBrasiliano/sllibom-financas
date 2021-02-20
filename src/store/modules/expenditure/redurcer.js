@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   error: false,
 };
 
-const auth = (state = INITIAL_STATE, action) => {
+const expenditure = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.EXPENDITURE.REQUEST:
       return {
@@ -18,8 +18,6 @@ const auth = (state = INITIAL_STATE, action) => {
         ...state,
         loadingSubmitRequest: false,
         sent: true,
-        user: action.payload.user,
-        token: action.payload.token,
       };
     case types.EXPENDITURE.FAILURE:
       return {
@@ -32,4 +30,4 @@ const auth = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default auth;
+export default expenditure;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import HeaderUser from '../../components/HeaderUser';
 import SideMenuBar from '../../components/SideMenuBar';
-import Profile from '../../components/features/Profile';
+import Profile from '../../components/Features/Profile';
 
 import { MainContainer, MainSection } from './style';
 

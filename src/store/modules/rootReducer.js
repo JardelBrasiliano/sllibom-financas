@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 
 import auth from './auth/redurcer';
 import register from './register/redurcer';
-// import despesas from './despesas/redurcer';
-// import receitas from './receitas';
+import expenditure from './expenditure/redurcer';
+import recipe from './recipe/redurcer';
 
 export default combineReducers({
   auth,
   register,
-  // despesas,
-  // receitas,
+  expenditure,
+  recipe,
 });
