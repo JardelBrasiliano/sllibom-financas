@@ -9,6 +9,8 @@ import InputTag from '../../../InputTag';
 import { submitExpenditureRequest } from '../../../../store/modules/expenditure/actions';
 import { submitRecipeRequest } from '../../../../store/modules/recipe/actions';
 
+import { dataTodayFormatWithBar } from '../../../../utils/date';
+
 import {
   ExpenditureOrRecipeContainer,
   ExpenditureOrRecipeContent,
@@ -75,15 +77,8 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
   };
 
   useEffect(() => {
-    const date = new Date();
-    const day = date.getDate();
-    const month = !(date.getMonth() + 1 >= 10)
-      ? `0${date.getMonth()}`
-      : date.getMonth() + 1;
-
-    const year = date.getFullYear();
-
-    setShippingDay(`${day}/${month}/${year}`);
+    const date = dataTodayFormatWithBar();
+    setShippingDay(date);
     const { children } = props;
     setTitle(children);
   }, []);

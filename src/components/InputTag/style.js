@@ -6,7 +6,6 @@ export const InputContainer = styled.div`
   justify-content: flex-start;
 
   width: 90%;
-  margin-top: 40px;
   border-bottom: 1px solid rgba(88, 88, 88, 0.94);
 
   > input {

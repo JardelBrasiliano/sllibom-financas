@@ -17,7 +17,7 @@ import logo from '../../assets/logo.svg';
 
 const SideMenuBar = () => {
   const [open, setOpen] = useState(false);
-  const [openExpenditure, setOpenExpenditure] = useState(true); // << Mudar para false
+  const [openExpenditure, setOpenExpenditure] = useState(false); // << Mudar para false
   const [openRecipe, setOpenRecipe] = useState(false);
 
   const handleClick = () => {
@@ -86,6 +86,9 @@ const SideMenuBar = () => {
             </li>
             <li>
               <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/record">Relatoio</Link>
             </li>
             <li>
               <button

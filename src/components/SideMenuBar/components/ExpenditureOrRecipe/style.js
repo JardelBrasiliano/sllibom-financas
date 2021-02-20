@@ -105,6 +105,7 @@ export const Description = styled.div`
 
   width: 90%;
   margin-top: 40px;
+  margin-bottom: 40px;
   > p {
     position: absolute;
 
