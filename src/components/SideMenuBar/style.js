@@ -10,6 +10,7 @@ export const SideMenuContainer = styled.div`
   flex-direction: column;
 
   background-color: #fff;
+  box-shadow: 0px 0px 12px -7px #000000;
 `;
 
 export const Header = styled.header`

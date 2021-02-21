@@ -55,15 +55,14 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
 
   const sendRecipeToFirebase = () => {
     const date = today || anotherDate;
-    const dateBaseExpenditure = {
+    const dateBaseRecipe = {
       value,
       wasPaid,
       paidDay: date,
       description,
       tag,
     };
-
-    dispatch(submitRecipeRequest(dateBaseExpenditure, token, shippingDay));
+    dispatch(submitRecipeRequest(dateBaseRecipe, token, shippingDay));
   };
 
   const changeToday = () => {

@@ -40,6 +40,7 @@ export const BarNav = styled.ul`
   border-radius: 50px;
   margin: 20px 0 20px 0;
 
+  box-shadow: 0px 0px 12px -7px #000000;
   background-color: #fff;
 
   > li {
@@ -99,6 +100,7 @@ export const CardProfileContainer = styled.div`
   border-radius: 30px 30px 0 0;
 
   background-color: #fff;
+  box-shadow: 0px 0px 12px -7px #000000;
   font-family: Arial, Helvetica, sans-serif;
 
   > p {

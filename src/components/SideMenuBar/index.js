@@ -93,7 +93,7 @@ const SideMenuBar = () => {
               <Link to="/dashboard">Dashboard</Link>
             </li>
             <li>
-              <Link to="/record">Relatoio</Link>
+              <Link to="/record">Relatório</Link>
             </li>
             <li>
               <button

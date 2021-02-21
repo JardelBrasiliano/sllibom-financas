@@ -14,7 +14,6 @@ export const registerRequest = (name, email, password) => ({
 export const registerSuccess = () => ({
   type: types.REGISTER.SUCCESS,
 });
-
 export const registerFailure = () => ({
   type: types.REGISTER.FAILURE,
 });

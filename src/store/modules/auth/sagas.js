@@ -12,7 +12,7 @@ export function* singIn({ payload }) {
       email,
       password,
     );
-    console.log('q', user.uid);
+
     const snapshot = yield call(rsf.firestore.getDocument, `users/${user.uid}`);
     const resUser = snapshot.data();
 
@@ -23,7 +23,8 @@ export function* singIn({ payload }) {
 
     yield put(actions.signInSuccess(user.uid, person));
   } catch (error) {
-    actions.signInFailure();
+    console.log(error);
+    yield put(actions.signInFailure());
   }
 }
 export default all([takeLatest('@auth/SIGN_IN_REQUEST', singIn)]);

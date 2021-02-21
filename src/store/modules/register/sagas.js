@@ -18,7 +18,7 @@ export function* newRegistrationWithEmailPassword({ payload }) {
       email,
     });
 
-    yield actions.registerSuccess();
+    yield put(actions.registerSuccess());
   } catch (err) {
     yield put(actions.registerFailure());
   }

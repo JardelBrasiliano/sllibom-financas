@@ -41,6 +41,7 @@ export const BarNav = styled.ul`
   margin-top: 10px;
 
   background-color: #fff;
+  box-shadow: 0px 0px 12px -7px #000000;
 
   > li {
     display: flex;
@@ -124,6 +125,7 @@ export const CardProfileContainer = styled.div`
   border-radius: 30px 30px 0 0;
 
   background-color: #fff;
+  box-shadow: 0px 0px 12px -7px #000000;
   font-family: Arial, Helvetica, sans-serif;
 
   margin-top: 20px;
