@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { SelectedTag, InputContainer } from './style';
+import { SelectedTag, InputContainer, ErrorInput } from './style';
 
-const InputTag = ({ setTag }) => {
+const InputTag = ({ setTag, tagErr }) => {
   const tags = [
     'Alimentação',
     'Educação',
@@ -36,6 +36,9 @@ const InputTag = ({ setTag }) => {
         </datalist>
 
         <SelectedTag />
+        <ErrorInput>
+          <p style={{ opacity: `${tagErr ? '1' : '0'}` }}>Tag obrigatoria</p>
+        </ErrorInput>
       </InputContainer>
     </>
   );
@@ -43,5 +46,6 @@ const InputTag = ({ setTag }) => {
 
 InputTag.propTypes = {
   setTag: PropTypes.func.isRequired,
+  tagErr: PropTypes.bool.isRequired,
 };
 export default InputTag;

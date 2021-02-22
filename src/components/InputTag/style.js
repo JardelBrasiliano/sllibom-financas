@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const InputContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: inherit;
   justify-content: flex-start;
@@ -16,3 +17,17 @@ export const InputContainer = styled.div`
   }
 `;
 export const SelectedTag = styled.div``;
+
+export const ErrorInput = styled.div`
+  position: absolute;
+  bottom: -6px;
+
+  width: 90%;
+  transition: 0.3s ease-in-out opacity;
+  > p {
+    position: absolute;
+    font-family: arial;
+    font-size: 10px;
+    color: red;
+  }
+`;

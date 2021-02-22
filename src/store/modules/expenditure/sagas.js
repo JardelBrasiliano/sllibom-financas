@@ -14,9 +14,8 @@ export function* sendExpenses({ payload }) {
     const { data, token, shippingDay } = payload;
     const newShippingDay = shippingDay.split('/').join('-');
     const { extMonth, extYear } = extentDate(shippingDay);
-
     // Verifica de foi Recebido
-    if (shippingDay) {
+    if (data.wasPaid) {
       // Levar o valor do dia completo
       yield call(
         rsf.firestore.addDocument,
@@ -123,12 +122,10 @@ export function* searchExpenses({ payload }) {
     for (let index = 0; index < +filter - 1; index += 1) {
       const searchDay = dayBefore(index).split('/').join('-');
       const { extYear } = extentDate(searchDay);
-
       const snapshot = yield call(
         rsf.firestore.getCollection,
         `/expenditure/${token}/paid/${extYear}/days/${searchDay}/values`,
       );
-
       snapshot.forEach((user) => {
         const recipe = {
           ...user.data().data,
@@ -140,9 +137,16 @@ export function* searchExpenses({ payload }) {
       });
     }
 
+    const snapshot1 = yield call(
+      rsf.firestore.getCollection,
+      `/expenditure/${token}/paid/2021/days/22-02-2021/values`,
+    );
+    snapshot1.forEach((user) => {
+      console.log('>', user);
+    });
     yield put(actions.searchExpenditureSuccess(listBefore7Day));
   } catch (error) {
-    actions.searchExpenditureFailure();
+    put(actions.searchExpenditureFailure());
   }
 }
 
@@ -179,6 +183,7 @@ export function* searchGraphsExpenses({ payload }) {
       if (user.id === extMonth) {
         currentListTag = user.data().tag;
       }
+      console.log(user);
     });
 
     const listBefore7Day = [];

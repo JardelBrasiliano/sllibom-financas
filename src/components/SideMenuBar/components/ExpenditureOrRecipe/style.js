@@ -52,6 +52,7 @@ export const ExpenditureOrRecipeContent = styled.div`
 `;
 
 export const Value = styled.div`
+  position: relative;
   display: flex;
   align-items: inherit;
   justify-content: flex-start;
@@ -123,6 +124,7 @@ export const Description = styled.div`
 `;
 
 export const GetDate = styled.div`
+  position: relative;
   display: flex;
   align-items: inherit;
   justify-content: flex-start;
@@ -156,12 +158,15 @@ export const GetDate = styled.div`
     &.active {
       background-color: #fb7254;
     }
+    &.deactivate {
+      background-color: #e1e1e1;
+    }
   }
   > input {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     border: none;
-    width: 90px;
+    width: 9090;
     height: 30px;
   }
 `;
@@ -226,5 +231,18 @@ export const BtnSave = styled.button`
   }
   &.active:hover {
     background: #214ecc;
+  }
+`;
+export const ErrorInput = styled.div`
+  position: absolute;
+  bottom: -6px;
+
+  width: 90%;
+  transition: 0.3s ease-in-out opacity;
+  > p {
+    position: absolute;
+    font-family: arial;
+    font-size: 10px;
+    color: red;
   }
 `;

@@ -10,7 +10,7 @@ import Features from '../../components/Features';
 import { MainContainer, MainSection } from './style';
 
 const MainPage = () => {
-  const { isSignedIn, token } = useSelector((state) => state.auth);
+  const { isSignedIn } = useSelector((state) => state.auth);
 
   return (
     <>

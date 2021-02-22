@@ -23,7 +23,6 @@ export function* singIn({ payload }) {
 
     yield put(actions.signInSuccess(user.uid, person));
   } catch (error) {
-    console.log(error);
     yield put(actions.signInFailure());
   }
 }

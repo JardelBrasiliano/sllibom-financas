@@ -1,6 +1,6 @@
+/* eslint-disable */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { removeExpenditureRequest } from '../../../../../store/modules/expenditure/actions';
 import { removeRecipeRequest } from '../../../../../store/modules/recipe/actions';
@@ -9,7 +9,7 @@ import { RecordTitle, RecordItems } from './style';
 
 const RecordList = ({ searchResult, updateList }) => {
   const { token } = useSelector((state) => state.auth);
-
+  
   const dispach = useDispatch();
 
   const removeItem = (item) => {
@@ -58,17 +58,4 @@ const RecordList = ({ searchResult, updateList }) => {
     </>
   );
 };
-// description: "teate1"
-// id: "XR512g5Lk8u0R7tFz8pF"
-// paidDay: "17/08/2021"
-// postDay: "20/01/2021"
-// tag: "Roupa"
-// type: "Receita"
-// value: "110"
-// wasPaid: true
-RecordList.propTypes = {
-  searchResult: PropTypes.arrayOf.isRequired,
-  updateList: PropTypes.arrayOf.isRequired,
-};
-
 export default RecordList;

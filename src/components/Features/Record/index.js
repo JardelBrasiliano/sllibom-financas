@@ -181,7 +181,7 @@ const Record = () => {
         </BarNav>
 
         <BarNav>
-          <InputTag setTag={setTag} />
+          <InputTag setTag={setTag} tagErr={false} />
         </BarNav>
 
         <CardProfileContainer>
@@ -191,7 +191,7 @@ const Record = () => {
             </CircularProgressContainer>
           ) : (
             <RecordList
-              searchResult={searchResult || []}
+              searchResult={searchResult === undefined ? [] : searchResult}
               updateList={updateList}
             />
           )}

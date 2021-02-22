@@ -45,7 +45,7 @@ const SideMenuBar = () => {
   return (
     <>
       {openExpenditure ? (
-        <ExpenditureOrRecipe setOpen={setOpenExpenditure}>
+        <ExpenditureOrRecipe setOpen={setOpenExpenditure} isRecipe={false}>
           Despesas
         </ExpenditureOrRecipe>
       ) : (
