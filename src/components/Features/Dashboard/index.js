@@ -59,7 +59,6 @@ const Dashboard = () => {
 
     setExpenditureCurrentMonth(+listExpenditureGraphsBar[totalRecipe]);
 
-    console.log(+newListRecipe[totalRecipe] - +newListExpen[totalRecipe]);
     setBalance(+newListRecipe[totalRecipe] - +newListExpen[totalRecipe]);
   }, [listExpenditureGraphsBar, listRecipeGraphsBar]);
   return (

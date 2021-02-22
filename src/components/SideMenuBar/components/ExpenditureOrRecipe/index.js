@@ -70,9 +70,7 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
       setValue('');
       return -1;
     }
-    console.log(tag);
     if (tag === 'all' || tag === undefined || tag === '') {
-      console.log('ee');
       setTagErr(true);
       return -1;
     }
@@ -90,7 +88,7 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
       const dateBaseRecipe = {
         value: fomatedValue,
         wasPaid,
-        paidDay: wasPaid ? anotherDate || shippingDay : '',
+        paidDay: anotherDate || shippingDay,
         description,
         tag,
       };

@@ -12,22 +12,24 @@ import rsf from '../../../services/configFirebase';
 export function* sendExpenses({ payload }) {
   try {
     const { data, token, shippingDay } = payload;
-    const newShippingDay = shippingDay.split('/').join('-');
-    const { extMonth, extYear } = extentDate(shippingDay);
+    const newDate = data.paidDay.split('/').join('-');
+
+    const { extMonth, extYear } = extentDate(data.paidDay);
     // Verifica de foi Recebido
     if (data.wasPaid) {
       // Levar o valor do dia completo
       yield call(
         rsf.firestore.addDocument,
-        `expenditure/${token}/paid/${extYear}/days/${newShippingDay}/values`,
+        `expenditure/${token}/paid/${extYear}/days/${newDate}/values`,
         {
           data,
+          postDay: shippingDay,
         },
       );
       // pegando o valor total do dia
       const snapshotDay = yield call(
         rsf.firestore.getDocument,
-        `expenditure/${token}/paid/${extYear}/days/${newShippingDay}`,
+        `expenditure/${token}/paid/${extYear}/days/${newDate}`,
       );
       // verifica de o valor exite
       if (snapshotDay.data()) {
@@ -37,13 +39,13 @@ export function* sendExpenses({ payload }) {
         // Atualizando valor
         yield call(
           rsf.firestore.setDocument,
-          `expenditure/${token}/paid/${extYear}/days/${newShippingDay}`,
+          `expenditure/${token}/paid/${extYear}/days/${newDate}`,
           { total: totalDay },
         );
       } else {
         yield call(
           rsf.firestore.setDocument,
-          `expenditure/${token}/paid/${extYear}/days/${newShippingDay}`,
+          `expenditure/${token}/paid/${extYear}/days/${newDate}`,
           { total: data.value },
         );
       }
@@ -99,10 +101,12 @@ export function* sendExpenses({ payload }) {
       }
     } else {
       // Cria um arquivo caso nao exista
+      const postDay = shippingDay.split('/').join('-');
+      const { extYear: currentYear } = extentDate(shippingDay);
 
       yield call(
         rsf.firestore.addDocument,
-        `expenditure/${token}/lack/${extYear}/days/${newShippingDay}/values`,
+        `expenditure/${token}/lack/${currentYear}/days/${postDay}/values`,
         {
           data,
         },

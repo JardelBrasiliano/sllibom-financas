@@ -13,23 +13,24 @@ export function* sendRecipe({ payload }) {
   try {
     const { data, token, shippingDay } = payload;
 
-    const newShippingDay = shippingDay.split('/').join('-');
-    const { extMonth, extYear } = extentDate(shippingDay);
+    const newDate = data.paidDay.split('/').join('-');
+    const { extMonth, extYear } = extentDate(data.paidDay);
 
     // Verifica de foi Recebido
     if (data.wasPaid) {
       // Levar o valor do dia completo
       yield call(
         rsf.firestore.addDocument,
-        `recipe/${token}/received/${extYear}/days/${newShippingDay}/values`,
+        `recipe/${token}/received/${extYear}/days/${newDate}/values`,
         {
           data,
+          postDay: shippingDay,
         },
       );
       // pegando o valor total do dia
       const snapshotDay = yield call(
         rsf.firestore.getDocument,
-        `recipe/${token}/received/${extYear}/days/${newShippingDay}`,
+        `recipe/${token}/received/${extYear}/days/${newDate}`,
       );
       if (snapshotDay.data()) {
         // Novo valor somado
@@ -38,13 +39,13 @@ export function* sendRecipe({ payload }) {
         // Atualizando valor
         yield call(
           rsf.firestore.setDocument,
-          `recipe/${token}/received/${extYear}/days/${newShippingDay}`,
+          `recipe/${token}/received/${extYear}/days/${newDate}`,
           { total: totalDay },
         );
       } else {
         yield call(
           rsf.firestore.setDocument,
-          `recipe/${token}/received/${extYear}/days/${newShippingDay}`,
+          `recipe/${token}/received/${extYear}/days/${newDate}`,
           { total: data.value },
         );
       }
@@ -99,10 +100,12 @@ export function* sendRecipe({ payload }) {
         );
       }
     } else {
+      const postDay = shippingDay.split('/').join('-');
+      const { extYear: currentYear } = extentDate(shippingDay);
       // Cria um arquivo caso nao exista
       yield call(
         rsf.firestore.addDocument,
-        `recipe/${token}/lack/${extYear}/days/${newShippingDay}/values`,
+        `recipe/${token}/lack/${currentYear}/days/${postDay}/values`,
         {
           data,
         },
@@ -167,20 +170,23 @@ export function* searchGraphsRecipe({ payload }) {
     ];
 
     let currentListTag = {};
+
+    // Set list de grafico da tags e de meses
     const snapshot = yield call(
       rsf.firestore.getCollection,
       `/recipe/${token}/received/${extYear}/month`,
     );
     snapshot.forEach((user) => {
+      console.log(listMonth.indexOf(user.id), user.id);
       const indexListMonth = listMonth.indexOf(user.id);
-      if (indexListMonth) {
+      if (indexListMonth >= 0) {
         listMonth[indexListMonth] = user.data().total;
       }
       if (user.id === extMonth) {
         currentListTag = user.data().tag;
       }
     });
-
+    // set lista do grafico dos dias
     const listBefore7Day = [];
 
     for (let index = 0; index < +7; index += 1) {
