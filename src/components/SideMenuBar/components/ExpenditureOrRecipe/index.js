@@ -57,6 +57,10 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
     const valdValue = validateCurrency(value);
 
     if (verfDate <= 0) {
+      if (!wasPaid) {
+        setAnotherDate('');
+        return 1;
+      }
       setErrDate(verfDate);
       setAnotherDate('');
       return -1;
@@ -66,7 +70,9 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
       setValue('');
       return -1;
     }
-    if (tag === 'all' && tag !== undefined) {
+    console.log(tag);
+    if (tag === 'all' || tag === undefined || tag === '') {
+      console.log('ee');
       setTagErr(true);
       return -1;
     }
@@ -84,7 +90,7 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
       const dateBaseRecipe = {
         value: fomatedValue,
         wasPaid,
-        paidDay: anotherDate || shippingDay,
+        paidDay: wasPaid ? anotherDate || shippingDay : '',
         description,
         tag,
       };
@@ -108,6 +114,11 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
 
       setErrDate('');
     }
+    if (wasPaid === false) {
+      setAnotherDate(false);
+      setErrDate(false);
+    }
+
     setToday(false);
     setAnotherDate(date);
   };
@@ -128,7 +139,7 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
     } else {
       setWaspaid(!wasPaid);
       setToday(shippingDay);
-      setAnotherDate(anotherDate);
+      setAnotherDate('');
     }
   };
 
@@ -250,7 +261,10 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
             <BtnSave
               onClick={() => sendToFirebase()}
               className={
-                value && !loadingSubmitRequest && !loadingSubmitRecipeRequest
+                value &&
+                !loadingSubmitRequest &&
+                !loadingSubmitRecipeRequest &&
+                !(tag === 'all' || tag === undefined || tag === '')
                   ? 'active'
                   : ''
               }

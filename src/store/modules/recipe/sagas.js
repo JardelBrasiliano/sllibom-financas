@@ -91,7 +91,7 @@ export function* sendRecipe({ payload }) {
         const tag = allTag;
         yield call(
           rsf.firestore.setDocument,
-          `recipe/${token}/lack/${extYear}/month/${extMonth}`,
+          `recipe/${token}/received/${extYear}/month/${extMonth}`,
           {
             total: data.value,
             tag,
@@ -100,7 +100,6 @@ export function* sendRecipe({ payload }) {
       }
     } else {
       // Cria um arquivo caso nao exista
-      console.log('o2');
       yield call(
         rsf.firestore.addDocument,
         `recipe/${token}/lack/${extYear}/days/${newShippingDay}/values`,
