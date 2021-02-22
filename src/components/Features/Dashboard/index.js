@@ -59,7 +59,6 @@ const Dashboard = () => {
     setRecipeCurrentMonth(
       +newListRecipe[totalRecipe] >= 0 ? +newListRecipe[totalRecipe] : 0,
     );
-    console.log(newListExpen);
     setExpenditureCurrentMonth(
       +listExpenditureGraphsBar[totalRecipe] >= 0
         ? +listExpenditureGraphsBar[totalRecipe]

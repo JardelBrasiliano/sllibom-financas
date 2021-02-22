@@ -111,7 +111,6 @@ const Record = () => {
   }, [tag]);
 
   useEffect(() => {
-    console.log(paidOrReceived);
     if (paidOrReceived) {
       let newList = [];
       searchResult.forEach((item) => {

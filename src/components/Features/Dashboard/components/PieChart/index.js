@@ -1,7 +1,30 @@
 import React from 'react';
 import { Pie } from '@reactchartjs/react-chart.js';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
+const PieGragphsContent = styled.div`
+  > p {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 15px;
+    font-size: 17px;
+    font-family: arial;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 72px;
+      height: 1.4px;
+      border-radius: 50%;
+      bottom: -3px;
+      background-color: rgb(21, 249, 44);
+    }
+  }
+`;
 const PieChart = () => {
   const { listRecipeGraphsPie } = useSelector((state) => state.recipe);
 
@@ -53,7 +76,10 @@ const PieChart = () => {
 
   return (
     <>
-      <Pie data={data} />
+      <PieGragphsContent>
+        <p>Receita por tag</p>
+        <Pie data={data} />
+      </PieGragphsContent>
     </>
   );
 };

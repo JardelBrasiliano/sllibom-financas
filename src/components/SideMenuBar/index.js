@@ -33,7 +33,7 @@ const SideMenuBar = () => {
 
   const dispach = useDispatch();
   const { id } = useParams();
-  console.log(id === 'profile');
+
   const handleClick = () => {
     setOpen((prev) => !prev);
   };
