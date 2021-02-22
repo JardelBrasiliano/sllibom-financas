@@ -7,7 +7,7 @@ import { searchRecipeRequest } from '../../../store/modules/recipe/actions';
 
 import { compareDate } from '../../../utils/date';
 
-import RecordList from '../../RecordList';
+import RecordList from './components/RecordList';
 import InputTag from '../../InputTag';
 
 import {

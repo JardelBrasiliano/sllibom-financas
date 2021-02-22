@@ -71,6 +71,5 @@ const extentDate = (date) => {
 
   return { extDay, extMonth, extYear };
 };
-const { extMonth } = extentDate('21/02/2021');
-console.log(extMonth);
+
 export { dataTodayFormatWithBar, dayBefore, compareDate, extentDate };

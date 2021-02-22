@@ -1,36 +1,30 @@
 import React from 'react';
 import { Pie } from '@reactchartjs/react-chart.js';
+import { useSelector } from 'react-redux';
 
 const PieChart = () => {
-  const mocData = [
-    { tag: 'Alimentação', value: 60 },
-    { tag: 'Educação', value: 70 },
-    { tag: 'Lazer', value: 100 },
-    { tag: 'Moradia', value: 250 },
-    { tag: 'Roupa', value: 150 },
-    { tag: 'Saúde', value: 230 },
-    { tag: 'Transporte', value: 30 },
-  ];
+  const { listRecipeGraphsPie } = useSelector((state) => state.recipe);
+
   const data = {
     labels: [
-      mocData[0].tag,
-      mocData[1].tag,
-      mocData[2].tag,
-      mocData[3].tag,
-      mocData[4].tag,
-      mocData[5].tag,
-      mocData[6].tag,
+      'Alimentação',
+      'Educação',
+      'Lazer',
+      'Moradia',
+      'Pagamento',
+      'Roupa',
+      'Transporte',
     ],
     datasets: [
       {
         data: [
-          mocData[0].value,
-          mocData[1].value,
-          mocData[2].value,
-          mocData[3].value,
-          mocData[4].value,
-          mocData[5].value,
-          mocData[6].value,
+          listRecipeGraphsPie.Alimentação,
+          listRecipeGraphsPie.Educação,
+          listRecipeGraphsPie.Lazer,
+          listRecipeGraphsPie.Moradia,
+          listRecipeGraphsPie.Pagamento,
+          listRecipeGraphsPie.Roupa,
+          listRecipeGraphsPie.Transporte,
         ],
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',

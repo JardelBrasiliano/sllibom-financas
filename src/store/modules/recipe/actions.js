@@ -9,6 +9,11 @@ export const types = {
     SUCCESS: '@recipe/RECIPE_SEARCH_SUCCESS',
     FAILURE: '@recipe/RECIPE_SEARCH_FAILURE',
   },
+  RECIPE_SEARCH_GRAPHS: {
+    REQUEST: '@recipe/RECIPE_SEARCH_GRAPHS_REQUEST',
+    SUCCESS: '@recipe/RECIPE_SEARCH_GRAPHS_SUCCESS',
+    FAILURE: '@recipe/RECIPE_SEARCH_GRAPHS_FAILURE',
+  },
   RECIPE_REMOVE: {
     REQUEST: '@recipe/RECIPE_REMOVE_REQUEST',
     SUCCESS: '@recipe/RECIPE_REMOVE_SUCCESS',
@@ -37,6 +42,18 @@ export const searchRecipeSuccess = (list) => ({
 });
 export const searchRecipeFailure = () => ({
   type: types.RECIPE_SEARCH.FAILURE,
+});
+// SEARCH GRAPHS
+export const searchGraphsRecipeRequest = (token) => ({
+  type: types.RECIPE_SEARCH_GRAPHS.REQUEST,
+  payload: { token },
+});
+export const searchGraphsRecipeSuccess = (listLine, listBar, Listpie) => ({
+  type: types.RECIPE_SEARCH_GRAPHS.SUCCESS,
+  payload: { listLine, listBar, Listpie },
+});
+export const searchGraphsRecipeFailure = () => ({
+  type: types.RECIPE_SEARCH_GRAPHS.FAILURE,
 });
 // REMOVE
 export const removeRecipeRequest = (id, token, date) => ({

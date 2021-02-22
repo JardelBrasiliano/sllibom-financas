@@ -1,46 +1,35 @@
 import React from 'react';
 import { Line } from '@reactchartjs/react-chart.js';
 
+import { useSelector } from 'react-redux';
+
 const MultiAxisLine = () => {
-  const mocData = [
-    { date: 'seg', value: 60 },
-    { date: 'ter', value: 70 },
-    { date: 'quar', value: 100 },
-    { date: 'quint', value: 250 },
-    { date: 'sext', value: 150 },
-    { date: 'sáb', value: 230 },
-    { date: 'dom', value: 30 },
-  ];
-  const mocData2 = [
-    { date: '20/01/2021', value: 90 },
-    { date: '21/01/2021', value: 70 },
-    { date: '22/01/2021', value: 150 },
-    { date: '23/01/2021', value: 150 },
-    { date: '24/01/2021', value: 50 },
-    { date: '25/01/2021', value: 130 },
-    { date: '26/01/2021', value: 90 },
-  ];
+  const { listRecipeGraphsLine } = useSelector((state) => state.recipe);
+  const { listExpenditureGraphsLine } = useSelector(
+    (state) => state.expenditure,
+  );
+
   const data = {
     labels: [
-      mocData[0].date,
-      mocData[1].date,
-      mocData[2].date,
-      mocData[3].date,
-      mocData[4].date,
-      mocData[5].date,
-      mocData[6].date,
+      listRecipeGraphsLine[6].postDay,
+      listRecipeGraphsLine[5].postDay,
+      listRecipeGraphsLine[4].postDay,
+      listRecipeGraphsLine[3].postDay,
+      listRecipeGraphsLine[2].postDay,
+      listRecipeGraphsLine[1].postDay,
+      listRecipeGraphsLine[0].postDay,
     ],
     datasets: [
       {
         label: 'Receita',
         data: [
-          mocData[0].value,
-          mocData[1].value,
-          mocData[2].value,
-          mocData[3].value,
-          mocData[4].value,
-          mocData[5].value,
-          mocData[6].value,
+          listRecipeGraphsLine[6].total,
+          listRecipeGraphsLine[5].total,
+          listRecipeGraphsLine[4].total,
+          listRecipeGraphsLine[3].total,
+          listRecipeGraphsLine[2].total,
+          listRecipeGraphsLine[1].total,
+          listRecipeGraphsLine[0].total,
         ],
         fill: false,
         backgroundColor: 'rgba(21, 249, 44,1)',
@@ -50,13 +39,13 @@ const MultiAxisLine = () => {
       {
         label: 'Despesa',
         data: [
-          mocData2[0].value,
-          mocData2[1].value,
-          mocData2[2].value,
-          mocData2[3].value,
-          mocData2[4].value,
-          mocData2[5].value,
-          mocData2[6].value,
+          listExpenditureGraphsLine[6].total,
+          listExpenditureGraphsLine[5].total,
+          listExpenditureGraphsLine[4].total,
+          listExpenditureGraphsLine[3].total,
+          listExpenditureGraphsLine[2].total,
+          listExpenditureGraphsLine[1].total,
+          listExpenditureGraphsLine[0].total,
         ],
         fill: false,
         backgroundColor: 'rgba(249, 48, 21, 1)',
@@ -83,5 +72,4 @@ const MultiAxisLine = () => {
     </>
   );
 };
-
 export default MultiAxisLine;

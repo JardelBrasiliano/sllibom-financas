@@ -9,6 +9,11 @@ export const types = {
     SUCCESS: '@expenditure/EXPENDITURE_SEARCH_SUCCESS',
     FAILURE: '@expenditure/EXPENDITURE_SEARCH_FAILURE',
   },
+  EXPENDITURE_SEARCH_GRAPHS: {
+    REQUEST: '@expenditure/EXPENDITURE_SEARCH_GRAPHS_REQUEST',
+    SUCCESS: '@expenditure/EXPENDITURE_SEARCH_GRAPHS_SUCCESS',
+    FAILURE: '@expenditure/EXPENDITURE_SEARCH_GRAPHS_FAILURE',
+  },
   EXPENDITURE_REMOVE: {
     REQUEST: '@expenditure/EXPENDITURE_REMOVE_REQUEST',
     SUCCESS: '@expenditure/EXPENDITURE_REMOVE_SUCCESS',
@@ -37,6 +42,18 @@ export const searchExpenditureSuccess = (list) => ({
 });
 export const searchExpenditureFailure = () => ({
   type: types.EXPENDITURE_SEARCH.FAILURE,
+});
+// SEARCH GRAPHS
+export const searchGraphsExpenditureRequest = (token) => ({
+  type: types.EXPENDITURE_SEARCH_GRAPHS.REQUEST,
+  payload: { token },
+});
+export const searchGraphsExpenditureSuccess = (listLine, listBar, Listpie) => ({
+  type: types.EXPENDITURE_SEARCH_GRAPHS.SUCCESS,
+  payload: { listLine, listBar, Listpie },
+});
+export const searchGraphsExpenditureFailure = () => ({
+  type: types.EXPENDITURE_SEARCH_GRAPHS.FAILURE,
 });
 // REMOVE
 export const removeExpenditureRequest = (id, token, date) => ({

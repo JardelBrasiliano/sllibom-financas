@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { removeExpenditureRequest } from '../../store/modules/expenditure/actions';
-import { removeRecipeRequest } from '../../store/modules/recipe/actions';
+import { removeExpenditureRequest } from '../../../../../store/modules/expenditure/actions';
+import { removeRecipeRequest } from '../../../../../store/modules/recipe/actions';
 
 import { RecordTitle, RecordItems } from './style';
 

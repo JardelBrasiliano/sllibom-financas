@@ -42,8 +42,11 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
 
   const sendExpenseToFirebase = () => {
     const date = today || anotherDate;
+
+    const valueFormatted = +value;
+
     const dateBaseExpenditure = {
-      value,
+      value: valueFormatted,
       wasPaid,
       paidDay: date,
       description,

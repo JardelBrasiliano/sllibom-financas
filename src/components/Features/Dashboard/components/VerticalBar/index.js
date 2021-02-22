@@ -1,54 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Bar } from '@reactchartjs/react-chart.js';
+import { useSelector } from 'react-redux';
 
 const VerticalBar = () => {
-  const mocData = [
-    { date: 'jan', value: 60 },
-    { date: 'fev', value: 70 },
-    { date: 'mar', value: 100 },
-    { date: 'abr', value: 250 },
-    { date: 'maio', value: 150 },
-    { date: 'jun', value: 230 },
-    { date: 'jul', value: 30 },
-    { date: 'ago', value: 250 },
-    { date: 'set', value: 150 },
-    { date: 'out', value: 230 },
-    { date: 'nov', value: 30 },
-    { date: 'dez', value: 30 },
-  ];
+  const [finalList, setFinalList] = useState([]);
+  const { listRecipeGraphsBar } = useSelector((state) => state.recipe);
+
+  useEffect(() => {
+    const newList = listRecipeGraphsBar.map((item) => {
+      if (!Number.isNaN(+item)) {
+        return +item;
+      }
+      return 0;
+    }, []);
+    setFinalList(newList);
+  }, [listRecipeGraphsBar]);
 
   const data = {
     labels: [
-      mocData[0].date,
-      mocData[1].date,
-      mocData[2].date,
-      mocData[3].date,
-      mocData[4].date,
-      mocData[5].date,
-      mocData[6].date,
-      mocData[7].date,
-      mocData[8].date,
-      mocData[9].date,
-      mocData[10].date,
-      mocData[11].date,
+      'jan',
+      'fev',
+      'mar',
+      'abr',
+      'maio',
+      'jun',
+      'jul',
+      'ago',
+      'set',
+      'out',
+      'nov',
+      'dez',
     ],
     datasets: [
       {
         label: 'receita',
         data: [
-          mocData[0].value,
-          mocData[1].value,
-          mocData[2].value,
-          mocData[3].value,
-          mocData[4].value,
-          mocData[5].value,
-          mocData[6].value,
-          mocData[7].value,
-          mocData[8].value,
-          mocData[9].value,
-          mocData[10].value,
-          mocData[11].value,
+          finalList[0],
+          finalList[1],
+          finalList[2],
+          finalList[3],
+          finalList[4],
+          finalList[5],
+          finalList[6],
+          finalList[7],
+          finalList[8],
+          finalList[9],
+          finalList[10],
+          finalList[11],
         ],
         backgroundColor: [
           'rgba(148, 21, 249, 0.4)',

@@ -1,10 +1,33 @@
 import { types } from './actions';
 
+const mocData = [
+  { postDay: 'seg', total: 0 },
+  { postDay: 'ter', total: 0 },
+  { postDay: 'quar', total: 0 },
+  { postDay: 'quint', total: 0 },
+  { postDay: 'sext', total: 0 },
+  { postDay: 'sáb', total: 0 },
+  { postDay: 'dom', total: 0 },
+];
+const mocData2 = [
+  { Alimentação: 0 },
+  { Educação: 0 },
+  { Lazer: 0 },
+  { Moradia: 0 },
+  { Roupa: 0 },
+  { Saúde: 0 },
+  { Transporte: 0 },
+];
+const mocData3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 const INITIAL_STATE = {
   loadingSubmitRecipeRequest: false,
   loadingSearchRecipeRequest: false,
   loadingRemovehRecipeRequest: false,
   listRecipe: [],
+  listRecipeGraphsLine: mocData,
+  listRecipeGraphsBar: mocData3,
+  listRecipeGraphsPie: mocData2,
   sentRecipe: false,
   error: false,
 };
@@ -45,6 +68,23 @@ const recipe = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loadingSearchRecipeRequest: false,
+        error: true,
+      };
+    // SEARCH GRAPHS
+    case types.RECIPE_SEARCH_GRAPHS.REQUEST:
+      return {
+        ...state,
+      };
+    case types.RECIPE_SEARCH_GRAPHS.SUCCESS:
+      return {
+        ...state,
+        listRecipeGraphsLine: action.payload.listLine,
+        listRecipeGraphsBar: action.payload.listBar,
+        listRecipeGraphsPie: action.payload.Listpie,
+      };
+    case types.RECIPE_SEARCH_GRAPHS.FAILURE:
+      return {
+        ...state,
         error: true,
       };
     // REMOVE
