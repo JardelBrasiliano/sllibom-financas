@@ -44,7 +44,7 @@ const RecordList = ({ searchResult, updateList }) => {
         <RecordItems key={item.id}>
           <li>{item.type[0]}</li>
           <li>{item.postDay}</li>
-          <li>{item.wasPaind ? 'sim' : 'não'}</li>
+          <li>{item.wasPaind ? 'não' : 'sim'}</li>
           <li>{item.paidDay}</li>
           <li>{item.tag}</li>
           <li>R$ {item.value}</li>
