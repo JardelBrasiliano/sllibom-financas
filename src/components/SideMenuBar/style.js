@@ -25,7 +25,7 @@ export const Header = styled.header`
   > img {
     width: 60px;
     height: 60px;
-
+    border-radius: 7px;
     margin-right: 15px;
   }
 

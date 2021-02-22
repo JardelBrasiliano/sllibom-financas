@@ -59,6 +59,7 @@ const Dashboard = () => {
 
     setExpenditureCurrentMonth(+listExpenditureGraphsBar[totalRecipe]);
 
+    console.log(+newListRecipe[totalRecipe] - +newListExpen[totalRecipe]);
     setBalance(+newListRecipe[totalRecipe] - +newListExpen[totalRecipe]);
   }, [listExpenditureGraphsBar, listRecipeGraphsBar]);
   return (
@@ -87,7 +88,7 @@ const Dashboard = () => {
               <strong
                 style={{
                   color: `${
-                    balance ? 'rgba(249, 48, 21, 1)' : 'rgba(21, 249, 44,1)'
+                    balance < 0 ? 'rgba(249, 48, 21, 1)' : 'rgba(21, 249, 44,1)'
                   }`,
                 }}
               >

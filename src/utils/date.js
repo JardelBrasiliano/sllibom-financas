@@ -74,6 +74,9 @@ const extentDate = (date) => {
 };
 
 const checkDateFormat = (date) => {
+  if (!date) {
+    return -2;
+  }
   const reg = /([0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4})/g;
   const todasAsDatas = date.match(reg);
 

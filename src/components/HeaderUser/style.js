@@ -27,7 +27,8 @@ export const User = styled.button`
   background-color: transparent;
   cursor: pointer;
   height: 100%;
-  width: 230px;
+
+  max-width: 230px;
 
   border: none;
   border-radius: 50px;

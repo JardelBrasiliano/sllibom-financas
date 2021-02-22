@@ -17,7 +17,7 @@ export function* sendRecipe({ payload }) {
     const { extMonth, extYear } = extentDate(shippingDay);
 
     // Verifica de foi Recebido
-    if (shippingDay) {
+    if (data.wasPaid) {
       // Levar o valor do dia completo
       yield call(
         rsf.firestore.addDocument,
@@ -91,7 +91,7 @@ export function* sendRecipe({ payload }) {
         const tag = allTag;
         yield call(
           rsf.firestore.setDocument,
-          `recipe/${token}/received/${extYear}/month/${extMonth}`,
+          `recipe/${token}/lack/${extYear}/month/${extMonth}`,
           {
             total: data.value,
             tag,
@@ -100,6 +100,7 @@ export function* sendRecipe({ payload }) {
       }
     } else {
       // Cria um arquivo caso nao exista
+      console.log('o2');
       yield call(
         rsf.firestore.addDocument,
         `recipe/${token}/lack/${extYear}/days/${newShippingDay}/values`,
@@ -221,11 +222,54 @@ export function* searchGraphsRecipe({ payload }) {
 
 export function* removeRecipe({ payload }) {
   try {
-    const { id, token, date } = payload;
+    const { id, value, currentTag, wasPaid, token, date } = payload;
+    const { extMonth, extYear } = extentDate(date);
+    const situation = wasPaid ? 'received' : 'lack';
 
     yield call(
       rsf.firestore.deleteDocument,
-      `/recipe/${token}/date/days/${date}/${id}`,
+      `/recipe/${token}/${situation}/${extYear}/days/${date}/values/${id}`,
+    );
+
+    // ATUALIZA O TOTAL DO MES
+    // pegando o valor total do dia
+    const snapshotDay = yield call(
+      rsf.firestore.getDocument,
+      `recipe/${token}/${situation}/${extYear}/days/${date}`,
+    );
+    // verifica de o valor exite
+    // Novo valor somado
+    const currentDay = snapshotDay.data().total || 0;
+    const totalDay = currentDay - value;
+    // Atualizando valor
+    yield call(
+      rsf.firestore.setDocument,
+      `recipe/${token}/${situation}/${extYear}/days/${date}`,
+      { total: totalDay },
+    );
+
+    // ATUALIZA O TOTAL DO MES
+    // Pega as informaçoes sobre o mes da data
+    const snapshotMonth = yield call(
+      rsf.firestore.getDocument,
+      `recipe/${token}/${situation}/${extYear}/month/${extMonth}`,
+    );
+    const currentMonth = snapshotMonth.data().total || 0;
+    const sumMonth = currentMonth - value;
+
+    // Passa as tags para uma variavel e depois verifica soma com o valor da tag atual;
+    const allTag = snapshotMonth.data().tag;
+    allTag[`${currentTag}`] = snapshotMonth.data().tag[`${currentTag}`] - value;
+    const tag = allTag; // Novo valor somado
+
+    // Atualiza as informações
+    yield call(
+      rsf.firestore.setDocument,
+      `recipe/${token}/${situation}/${extYear}/month/${extMonth}`,
+      {
+        total: sumMonth,
+        tag,
+      },
     );
     yield put(actions.removeRecipeSuccess());
   } catch (error) {

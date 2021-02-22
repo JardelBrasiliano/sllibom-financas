@@ -52,21 +52,39 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
 
   const dispatch = useDispatch();
 
-  const sendToFirebase = () => {
-    const date = anotherDate || today;
-    const verfDate = checkDateFormat(date);
+  const checkErro = () => {
+    const verfDate = checkDateFormat(anotherDate || shippingDay);
     const valdValue = validateCurrency(value);
 
-    if (verfDate && tag !== 'all' && tag !== undefined && valdValue > 0) {
+    if (verfDate <= 0) {
+      setErrDate(verfDate);
+      setAnotherDate('');
+      return -1;
+    }
+    if (valdValue <= 0) {
+      setErrValue(valdValue);
+      setValue('');
+      return -1;
+    }
+    if (tag === 'all' && tag !== undefined) {
+      setTagErr(true);
+      return -1;
+    }
+    return 1;
+  };
+  const sendToFirebase = () => {
+    const validateForm = checkErro();
+
+    if (validateForm > 0) {
       setErrDate('');
       setTagErr(false);
       setErrValue(true);
-
       const fomatedValue = +value;
+
       const dateBaseRecipe = {
         value: fomatedValue,
         wasPaid,
-        paidDay: date,
+        paidDay: anotherDate || shippingDay,
         description,
         tag,
       };
@@ -76,25 +94,18 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
         dispatch(submitExpenditureRequest(dateBaseRecipe, token, shippingDay));
       }
     }
-    if (!verfDate) {
-      setErrDate(verfDate);
-    }
-    if (tag === 'all' && tag !== undefined) {
-      setTagErr(true);
-    }
-    if (valdValue < 0) {
-      setErrValue(valdValue);
-    }
   };
 
   const changeToday = () => {
-    setAnotherDate('');
+    setAnotherDate(false);
     setErrDate('');
     setToday(shippingDay);
   };
 
   const changAnotherDate = (date) => {
     if (date === '') {
+      setAnotherDate(false);
+
       setErrDate('');
     }
     setToday(false);
@@ -109,11 +120,24 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
     }
   };
 
+  const changWasPaid = () => {
+    if (wasPaid) {
+      setWaspaid(!wasPaid);
+      setToday('');
+      setAnotherDate(false);
+    } else {
+      setWaspaid(!wasPaid);
+      setToday(shippingDay);
+      setAnotherDate(anotherDate);
+    }
+  };
+
   useEffect(() => {
     const date = dataTodayFormatWithBar();
     setShippingDay(date);
     const { children } = props;
     setTitle(children);
+    setToday(date);
   }, []);
 
   return (
@@ -161,7 +185,7 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
               id="scales"
               name="scales"
               checked={wasPaid}
-              onChange={() => setWaspaid(!wasPaid)}
+              onChange={() => changWasPaid()}
             />
           </WasPaid>
 
@@ -176,8 +200,8 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
           >
             <button
               type="button"
-              className={`${today ? 'active' : ''}${
-                wasPaid ? ' ' : ' deactivate'
+              className={`${today || wasPaid ? 'active ' : ''}${
+                anotherDate === '' ? ' ' : ' deactivate'
               }`}
               onClick={changeToday}
             >
@@ -226,10 +250,7 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
             <BtnSave
               onClick={() => sendToFirebase()}
               className={
-                value &&
-                (today || anotherDate !== '') &&
-                !loadingSubmitRequest &&
-                !loadingSubmitRecipeRequest
+                value && !loadingSubmitRequest && !loadingSubmitRecipeRequest
                   ? 'active'
                   : ''
               }

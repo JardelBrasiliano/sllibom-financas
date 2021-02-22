@@ -7,8 +7,8 @@ import Register from '../../components/Register';
 
 import { Header, Main, Action, SignInOrRegister, InputControl } from './style';
 
-import logo from '../../assets/logo.svg';
-import initiation from '../../assets/home-page.png';
+import logo from '../../assets/logo.png';
+import initiation from '../../assets/home-page.jpg';
 
 const LoginPage = () => {
   const [active, setActive] = useState(true);
@@ -21,7 +21,7 @@ const LoginPage = () => {
       <Header className="header-container">
         <div className="header-content">
           <img className="header-img" src={logo} alt="" />
-          <h1 className="header-texto">Mobills</h1>
+          <h1 className="header-texto">Sllibom</h1>
         </div>
       </Header>
 

@@ -17,11 +17,11 @@ const RecordList = ({ searchResult, updateList }) => {
 
     switch (item.type) {
       case 'Despesas':
-        dispach(removeExpenditureRequest(item.id, token, date));
+        dispach(removeExpenditureRequest(item.id, item.value, item.tag, item.wasPaind, token, date));
         updateList();
         break;
       case 'Receita':
-        dispach(removeRecipeRequest(item.id, token, date));
+        dispach(removeRecipeRequest(item.id, item.value, item.tag, item.wasPaind, token, date));
         updateList();
         break;
 

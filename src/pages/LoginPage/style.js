@@ -19,6 +19,7 @@ export const Header = styled.header`
       width: 50px;
       height: 50px;
 
+      border-radius: 7px;
       margin-right: 15px;
     }
 

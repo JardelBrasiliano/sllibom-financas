@@ -9,7 +9,7 @@ import rootReducer from './modules/rootReducer';
 import rootSaga from './modules/rootSaga';
 
 const persistConfig = {
-  key: 'mobills',
+  key: 'Sllibom',
   storage,
   whitelist: ['auth'],
 };

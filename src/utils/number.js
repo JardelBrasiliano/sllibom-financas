@@ -5,7 +5,7 @@ export const validateCurrency = (number) => {
     if (+number <= 0) {
       return -1;
     }
-    return true;
+    return 1;
   }
   if (number === '') {
     return -1;

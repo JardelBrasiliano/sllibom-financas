@@ -16,7 +16,7 @@ import {
   BtnAction,
 } from './style';
 
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo.png';
 
 const SideMenuBar = () => {
   const [open, setOpen] = useState(false);
@@ -62,7 +62,7 @@ const SideMenuBar = () => {
       <SideMenuContainer>
         <Header>
           <img src={logo} alt="" />
-          <h2>Mobills</h2>
+          <h2>Sllibom</h2>
         </Header>
 
         <ClickAwayListener onClickAway={handleClickAway}>

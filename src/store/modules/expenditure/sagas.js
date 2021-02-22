@@ -99,6 +99,7 @@ export function* sendExpenses({ payload }) {
       }
     } else {
       // Cria um arquivo caso nao exista
+
       yield call(
         rsf.firestore.addDocument,
         `expenditure/${token}/lack/${extYear}/days/${newShippingDay}/values`,
@@ -137,13 +138,6 @@ export function* searchExpenses({ payload }) {
       });
     }
 
-    const snapshot1 = yield call(
-      rsf.firestore.getCollection,
-      `/expenditure/${token}/paid/2021/days/22-02-2021/values`,
-    );
-    snapshot1.forEach((user) => {
-      console.log('>', user);
-    });
     yield put(actions.searchExpenditureSuccess(listBefore7Day));
   } catch (error) {
     put(actions.searchExpenditureFailure());
@@ -183,7 +177,6 @@ export function* searchGraphsExpenses({ payload }) {
       if (user.id === extMonth) {
         currentListTag = user.data().tag;
       }
-      console.log(user);
     });
 
     const listBefore7Day = [];
@@ -225,11 +218,51 @@ export function* searchGraphsExpenses({ payload }) {
 
 export function* removeExpenses({ payload }) {
   try {
-    const { id, token, date } = payload;
-
+    const { id, value, currentTag, wasPaid, token, date } = payload;
+    const { extMonth, extYear } = extentDate(date);
+    const situation = wasPaid ? 'paid' : 'lack';
     yield call(
       rsf.firestore.deleteDocument,
-      `/expenditure/${token}/date/days/${date}/${id}`,
+      `/expenditure/${token}/${situation}/${extYear}/days/${date}/values/${id}`,
+    );
+
+    // pegando o valor total do dia
+    const snapshotDay = yield call(
+      rsf.firestore.getDocument,
+      `expenditure/${token}/${situation}/${extYear}/days/${date}`,
+    );
+    // verifica de o valor exite
+    // Novo valor somado
+    const currentDay = snapshotDay.data().total || 0;
+    const totalDay = currentDay - value;
+    // Atualizando valor
+    yield call(
+      rsf.firestore.setDocument,
+      `expenditure/${token}/${situation}/${extYear}/days/${date}`,
+      { total: totalDay },
+    );
+    // ATUALIZA O TOTAL DO MES
+    // Pega as informaçoes sobre o mes da data
+    const snapshotMonth = yield call(
+      rsf.firestore.getDocument,
+      `expenditure/${token}/${situation}/${extYear}/month/${extMonth}`,
+    );
+    const currentMonth = snapshotMonth.data().total || 0;
+    const sumMonth = currentMonth - value;
+
+    // Passa as tags para uma variavel e depois verifica soma com o valor da tag atual;
+    const allTag = snapshotMonth.data().tag;
+    allTag[`${currentTag}`] = snapshotMonth.data().tag[`${currentTag}`] - value;
+    const tag = allTag; // Novo valor somado
+
+    // Atualiza as informações
+    yield call(
+      rsf.firestore.setDocument,
+      `expenditure/${token}/${situation}/${extYear}/month/${extMonth}`,
+      {
+        total: sumMonth,
+        tag,
+      },
     );
     yield put(actions.removeExpenditureSuccess());
   } catch (error) {
