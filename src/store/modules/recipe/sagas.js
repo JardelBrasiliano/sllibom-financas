@@ -177,7 +177,6 @@ export function* searchGraphsRecipe({ payload }) {
       `/recipe/${token}/received/${extYear}/month`,
     );
     snapshot.forEach((user) => {
-      console.log(listMonth.indexOf(user.id), user.id);
       const indexListMonth = listMonth.indexOf(user.id);
       if (indexListMonth >= 0) {
         listMonth[indexListMonth] = user.data().total;
@@ -227,55 +226,62 @@ export function* searchGraphsRecipe({ payload }) {
 
 export function* removeRecipe({ payload }) {
   try {
-    const { id, value, currentTag, wasPaid, token, date } = payload;
-    const { extMonth, extYear } = extentDate(date);
-    const situation = wasPaid ? 'received' : 'lack';
-
-    yield call(
-      rsf.firestore.deleteDocument,
-      `/recipe/${token}/${situation}/${extYear}/days/${date}/values/${id}`,
+    const { item, token } = payload;
+    const { extMonth: paindDayMonth, extYear: paindDayYear } = extentDate(
+      item.paidDay,
     );
+    const { extYear: postDayYear } = extentDate(item.postDay);
 
-    // ATUALIZA O TOTAL DO MES
-    // pegando o valor total do dia
-    const snapshotDay = yield call(
-      rsf.firestore.getDocument,
-      `recipe/${token}/${situation}/${extYear}/days/${date}`,
-    );
-    // verifica de o valor exite
-    // Novo valor somado
-    const currentDay = snapshotDay.data().total || 0;
-    const totalDay = currentDay - value;
-    // Atualizando valor
-    yield call(
-      rsf.firestore.setDocument,
-      `recipe/${token}/${situation}/${extYear}/days/${date}`,
-      { total: totalDay },
-    );
+    const formtPaidDay = item.paidDay.split('/').join('-');
+    const formtPostDay = item.postDay.split('/').join('-');
 
-    // ATUALIZA O TOTAL DO MES
-    // Pega as informaçoes sobre o mes da data
-    const snapshotMonth = yield call(
-      rsf.firestore.getDocument,
-      `recipe/${token}/${situation}/${extYear}/month/${extMonth}`,
-    );
-    const currentMonth = snapshotMonth.data().total || 0;
-    const sumMonth = currentMonth - value;
+    const isPaid = `/recipe/${token}/received/${paindDayYear}/days/${formtPaidDay}/values/${item.id}`;
+    const isLack = `/recipe/${token}/lack/${postDayYear}/days/${formtPostDay}/values/${item.id}`;
 
-    // Passa as tags para uma variavel e depois verifica soma com o valor da tag atual;
-    const allTag = snapshotMonth.data().tag;
-    allTag[`${currentTag}`] = snapshotMonth.data().tag[`${currentTag}`] - value;
-    const tag = allTag; // Novo valor somado
+    const isActual = item.wasPaid ? isPaid : isLack;
 
-    // Atualiza as informações
-    yield call(
-      rsf.firestore.setDocument,
-      `recipe/${token}/${situation}/${extYear}/month/${extMonth}`,
-      {
-        total: sumMonth,
-        tag,
-      },
-    );
+    yield call(rsf.firestore.deleteDocument, isActual);
+    if (item.wasPaid) {
+      // pegando o valor total do dia
+      const snapshotDay = yield call(
+        rsf.firestore.getDocument,
+        `recipe/${token}/received/${paindDayYear}/days/${formtPaidDay}`,
+      );
+      // verifica de o valor exite
+      // Novo valor somado
+      const currentDay = snapshotDay.data().total || 0;
+      const totalDay = currentDay - item.value;
+      // Atualizando valor
+      yield call(
+        rsf.firestore.setDocument,
+        `recipe/${token}/received/${paindDayYear}/days/${formtPaidDay}`,
+        { total: totalDay },
+      );
+      // ATUALIZA O TOTAL DO MES
+      // Pega as informaçoes sobre o mes da data
+      const snapshotMonth = yield call(
+        rsf.firestore.getDocument,
+        `recipe/${token}/received/${paindDayYear}/month/${paindDayMonth}`,
+      );
+      const currentMonth = snapshotMonth.data().total || 0;
+      const sumMonth = currentMonth - item.value;
+
+      // Passa as tags para uma variavel e depois verifica soma com o valor da tag atual;
+      const allTag = snapshotMonth.data().tag;
+      allTag[`${item.tag}`] =
+        snapshotMonth.data().tag[`${item.tag}`] - item.value;
+      const tag = allTag; // Novo valor somado
+
+      // Atualiza as informações
+      yield call(
+        rsf.firestore.setDocument,
+        `recipe/${token}/received/${paindDayYear}/month/${paindDayMonth}`,
+        {
+          total: sumMonth,
+          tag,
+        },
+      );
+    }
     yield put(actions.removeRecipeSuccess());
   } catch (error) {
     yield put(actions.removeRecipeFailure());

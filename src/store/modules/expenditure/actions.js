@@ -56,16 +56,9 @@ export const searchGraphsExpenditureFailure = () => ({
   type: types.EXPENDITURE_SEARCH_GRAPHS.FAILURE,
 });
 // REMOVE
-export const removeExpenditureRequest = (
-  id,
-  value,
-  currentTag,
-  wasPaid,
-  token,
-  date,
-) => ({
+export const removeExpenditureRequest = (item, token) => ({
   type: types.EXPENDITURE_REMOVE.REQUEST,
-  payload: { id, value, currentTag, token, date },
+  payload: { item, token },
 });
 
 export const removeExpenditureSuccess = () => ({

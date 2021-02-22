@@ -13,15 +13,14 @@ const RecordList = ({ searchResult, updateList }) => {
   const dispach = useDispatch();
 
   const removeItem = (item) => {
-    const date = item.postDay.split('/').join('-');
-
+    
     switch (item.type) {
       case 'Despesas':
-        dispach(removeExpenditureRequest(item.id, item.value, item.tag, item.wasPaind, token, date));
+        dispach(removeExpenditureRequest(item, token));
         updateList();
         break;
       case 'Receita':
-        dispach(removeRecipeRequest(item.id, item.value, item.tag, item.wasPaind, token, date));
+        dispach(removeRecipeRequest(item, token));
         updateList();
         break;
 

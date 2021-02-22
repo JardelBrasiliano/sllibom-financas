@@ -222,52 +222,62 @@ export function* searchGraphsExpenses({ payload }) {
 
 export function* removeExpenses({ payload }) {
   try {
-    const { id, value, currentTag, wasPaid, token, date } = payload;
-    const { extMonth, extYear } = extentDate(date);
-    const situation = wasPaid ? 'paid' : 'lack';
-    yield call(
-      rsf.firestore.deleteDocument,
-      `/expenditure/${token}/${situation}/${extYear}/days/${date}/values/${id}`,
+    const { item, token } = payload;
+    const { extMonth: paindDayMonth, extYear: paindDayYear } = extentDate(
+      item.paidDay,
     );
+    const { extYear: postDayYear } = extentDate(item.postDay);
 
-    // pegando o valor total do dia
-    const snapshotDay = yield call(
-      rsf.firestore.getDocument,
-      `expenditure/${token}/${situation}/${extYear}/days/${date}`,
-    );
-    // verifica de o valor exite
-    // Novo valor somado
-    const currentDay = snapshotDay.data().total || 0;
-    const totalDay = currentDay - value;
-    // Atualizando valor
-    yield call(
-      rsf.firestore.setDocument,
-      `expenditure/${token}/${situation}/${extYear}/days/${date}`,
-      { total: totalDay },
-    );
-    // ATUALIZA O TOTAL DO MES
-    // Pega as informaçoes sobre o mes da data
-    const snapshotMonth = yield call(
-      rsf.firestore.getDocument,
-      `expenditure/${token}/${situation}/${extYear}/month/${extMonth}`,
-    );
-    const currentMonth = snapshotMonth.data().total || 0;
-    const sumMonth = currentMonth - value;
+    const formtPaidDay = item.paidDay.split('/').join('-');
+    const formtPostDay = item.postDay.split('/').join('-');
 
-    // Passa as tags para uma variavel e depois verifica soma com o valor da tag atual;
-    const allTag = snapshotMonth.data().tag;
-    allTag[`${currentTag}`] = snapshotMonth.data().tag[`${currentTag}`] - value;
-    const tag = allTag; // Novo valor somado
+    const isPaid = `/expenditure/${token}/paid/${paindDayYear}/days/${formtPaidDay}/values/${item.id}`;
+    const isLack = `/expenditure/${token}/lack/${postDayYear}/days/${formtPostDay}/values/${item.id}`;
 
-    // Atualiza as informações
-    yield call(
-      rsf.firestore.setDocument,
-      `expenditure/${token}/${situation}/${extYear}/month/${extMonth}`,
-      {
-        total: sumMonth,
-        tag,
-      },
-    );
+    const isActual = item.wasPaid ? isPaid : isLack;
+
+    yield call(rsf.firestore.deleteDocument, isActual);
+    if (item.wasPaid) {
+      // pegando o valor total do dia
+      const snapshotDay = yield call(
+        rsf.firestore.getDocument,
+        `expenditure/${token}/paid/${paindDayYear}/days/${formtPaidDay}`,
+      );
+      // verifica de o valor exite
+      // Novo valor somado
+      const currentDay = snapshotDay.data().total || 0;
+      const totalDay = currentDay - item.value;
+      // Atualizando valor
+      yield call(
+        rsf.firestore.setDocument,
+        `expenditure/${token}/paid/${paindDayYear}/days/${formtPaidDay}`,
+        { total: totalDay },
+      );
+      // ATUALIZA O TOTAL DO MES
+      // Pega as informaçoes sobre o mes da data
+      const snapshotMonth = yield call(
+        rsf.firestore.getDocument,
+        `expenditure/${token}/paid/${paindDayYear}/month/${paindDayMonth}`,
+      );
+      const currentMonth = snapshotMonth.data().total || 0;
+      const sumMonth = currentMonth - item.value;
+
+      // Passa as tags para uma variavel e depois verifica soma com o valor da tag atual;
+      const allTag = snapshotMonth.data().tag;
+      allTag[`${item.tag}`] =
+        snapshotMonth.data().tag[`${item.tag}`] - item.value;
+      const tag = allTag; // Novo valor somado
+
+      // Atualiza as informações
+      yield call(
+        rsf.firestore.setDocument,
+        `expenditure/${token}/paid/${paindDayYear}/month/${paindDayMonth}`,
+        {
+          total: sumMonth,
+          tag,
+        },
+      );
+    }
     yield put(actions.removeExpenditureSuccess());
   } catch (error) {
     yield put(actions.removeExpenditureFailure());

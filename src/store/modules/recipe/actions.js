@@ -56,16 +56,9 @@ export const searchGraphsRecipeFailure = () => ({
   type: types.RECIPE_SEARCH_GRAPHS.FAILURE,
 });
 // REMOVE
-export const removeRecipeRequest = (
-  id,
-  value,
-  currentTag,
-  wasPaid,
-  token,
-  date,
-) => ({
+export const removeRecipeRequest = (item, token) => ({
   type: types.RECIPE_REMOVE.REQUEST,
-  payload: { id, token, date },
+  payload: { item, token },
 });
 export const removeRecipeSuccess = () => ({
   type: types.RECIPE_REMOVE.SUCCESS,
