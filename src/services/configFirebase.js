@@ -4,12 +4,12 @@ import '@firebase/firestore';
 import ReduxSagaFirebase from 'redux-saga-firebase';
 
 const myFirebaseApp = firebase.initializeApp({
-  apiKey: 'AIzaSyAiy_OIOCs77aBB9bf57NjsHc3APot2F6k',
-  authDomain: 'sllibom-financas.firebaseapp.com',
-  projectId: 'sllibom-financas',
-  storageBucket: 'sllibom-financas.appspot.com',
-  messagingSenderId: '125578706534',
-  appId: '1:125578706534:web:d9fcff1ca1b36d7d40b7a7',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTHO_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 });
 
 const rsf = new ReduxSagaFirebase(myFirebaseApp);
