@@ -34,7 +34,7 @@ const RecordList = ({ searchResult, updateList }) => {
       <RecordTitle>
         <li>tipo</li>
         <li>dia postado</li>
-        <li>pago</li>
+        <li>pago/recebido</li>
         <li>dia pago</li>
         <li>tag</li>
         <li>valor</li>
@@ -47,7 +47,7 @@ const RecordList = ({ searchResult, updateList }) => {
           <li>{item.wasPaid ? 'sim' : 'não'}</li>
           <li>{item.paidDay}</li>
           <li>{item.tag}</li>
-          <li>R$ {item.value}</li>
+          <li>R$ {item.value.toFixed(2).split('.').join(',')}</li>
           <li>
             <button type='button' onClick={() => removeItem(item)}>
               <DeleteOutlineOutlined color='error' />

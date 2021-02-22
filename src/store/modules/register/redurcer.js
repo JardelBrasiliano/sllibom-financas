@@ -1,25 +1,31 @@
 import { types } from './actions';
 
 const INITIAL_STATE = {
-  loadingregisterRequest: false,
+  loadingregRisterRequest: false,
   error: false,
+  success: false,
 };
 const register = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.REGISTER.REQUEST:
       return {
         ...state,
-        loadingregisterRequest: true,
+        loadingregRisterRequest: true,
+        error: false,
+        success: false,
       };
     case types.REGISTER.SUCCESS:
       return {
         ...state,
-        loadingregisterRequest: false,
+        loadingregRisterRequest: false,
+        error: false,
+        success: true,
       };
     case types.REGISTER.FAILURE:
       return {
         ...state,
-        loadingregisterRequest: false,
+        loadingregRisterRequest: false,
+        success: false,
         error: true,
       };
     default:

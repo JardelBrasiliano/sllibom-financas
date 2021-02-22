@@ -83,7 +83,9 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
       setErrDate('');
       setTagErr(false);
       setErrValue(true);
-      const fomatedValue = +value;
+
+      const valueWithPont = value.split(',').join('.');
+      const fomatedValue = +valueWithPont;
 
       const dateBaseRecipe = {
         value: fomatedValue,
@@ -176,7 +178,7 @@ const ExpenditureOrRecipe = ({ setOpen, isRecipe, ...props }) => {
             <ErrorInput>
               {
                 <p style={{ opacity: `${errValue === -2 ? '1' : '0'}` }}>
-                  Formato errado - 1000,00
+                  formato inválido - 1000,00
                 </p>
               }
               {

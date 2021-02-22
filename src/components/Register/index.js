@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 import { registerRequest } from '../../store/modules/register/actions';
@@ -16,7 +16,7 @@ const Cadastrar = () => {
   const [email, setEmail] = useState('');
   const [password, setpassword] = useState('');
 
-  const { loadingregisterRequest, error } = useSelector(
+  const { loadingregRisterRequest, error, success } = useSelector(
     (state) => state.register,
   );
 
@@ -25,6 +25,14 @@ const Cadastrar = () => {
   const signUp = () => {
     dispatch(registerRequest(name, email, password));
   };
+
+  useEffect(() => {
+    if (success) {
+      setName('');
+      setEmail('');
+      setpassword('');
+    }
+  }, [success]);
 
   return (
     <>
@@ -57,6 +65,9 @@ const Cadastrar = () => {
             <p style={{ opacity: `${error ? '1' : '0'}` }}>
               O endereço de email ou a senha que você não é válido.
             </p>
+            <p style={{ opacity: `${success ? '1' : '0'}`, color: 'green' }}>
+              Email Cadastrado com sucesso.
+            </p>
           </ErrorInput>
         </Input>
 
@@ -78,7 +89,7 @@ const Cadastrar = () => {
         </Input>
       </InputContainer>
 
-      {!loadingregisterRequest ? (
+      {!loadingregRisterRequest ? (
         <BtnSignInOrRegister onClick={() => signUp()}>
           CADASTRAR
         </BtnSignInOrRegister>

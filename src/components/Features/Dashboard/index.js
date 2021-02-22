@@ -79,13 +79,13 @@ const Dashboard = () => {
             <BarNav>
               <p>Receita mês atual</p>
               <strong style={{ color: 'rgba(21, 249, 44,1)' }}>
-                {recipeCurrentMonth}
+                {recipeCurrentMonth.toFixed(2).split('.').join(',')}
               </strong>
             </BarNav>
             <BarNav>
               <p>Despesas mês atual</p>
               <strong style={{ color: 'rgba(249, 48, 21, 1)' }}>
-                {expenditureCurrentMonth}
+                {expenditureCurrentMonth.toFixed(2).split('.').join(',')}
               </strong>
             </BarNav>
             <BarNav>
@@ -97,7 +97,7 @@ const Dashboard = () => {
                   }`,
                 }}
               >
-                {balance}
+                {balance.toFixed(2).split('.').join(',')}
               </strong>
             </BarNav>
           </BarNavContainer>
