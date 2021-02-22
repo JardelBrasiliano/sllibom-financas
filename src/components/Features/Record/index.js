@@ -18,6 +18,7 @@ import {
   CardProfileContainer,
   InputCheckBox,
   CircularProgressContainer,
+  InputCheckBoxPaidOrRecived,
 } from './style';
 
 const Record = () => {
@@ -25,6 +26,7 @@ const Record = () => {
   const [searchDays, setSearchDays] = useState(7);
   const [searchListExpenditure, setSearchListExpenditure] = useState(true);
   const [searchListRecipe, setSearchListRecipe] = useState(true);
+  const [paidOrReceived, setPaidOrReceived] = useState(false);
   const [tag, setTag] = useState('');
 
   const { token } = useSelector((state) => state.auth);
@@ -107,6 +109,24 @@ const Record = () => {
       setSearchResult([]);
     }
   }, [tag]);
+
+  useEffect(() => {
+    console.log(paidOrReceived);
+    if (paidOrReceived) {
+      let newList = [];
+      searchResult.forEach((item) => {
+        if (item.wasPaid === true) {
+          newList = [...newList, item];
+        }
+      });
+      setSearchResult(newList);
+    } else {
+      const newList = listExpenditure.concat(listRecipe);
+
+      const ordList = newList.sort(compareDate);
+      setSearchResult(ordList);
+    }
+  }, [paidOrReceived]);
   return (
     <RecordContainer>
       <RecordContent>
@@ -182,6 +202,18 @@ const Record = () => {
 
         <BarNav>
           <InputTag setTag={setTag} tagErr={false} />
+          <InputCheckBoxPaidOrRecived>
+            <InputCheckBox>
+              <p>Pago/Recebido</p>
+              <input
+                type="checkbox"
+                id="paid-received"
+                name="rpaid-received"
+                checked={paidOrReceived}
+                onChange={() => setPaidOrReceived(!paidOrReceived)}
+              />
+            </InputCheckBox>
+          </InputCheckBoxPaidOrRecived>
         </BarNav>
 
         <CardProfileContainer>

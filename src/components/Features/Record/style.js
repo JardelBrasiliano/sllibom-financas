@@ -36,6 +36,9 @@ export const BarNav = styled.ul`
   align-items: center;
   justify-content: center;
 
+  box-sizing: border-box;
+  padding-left: 21px;
+  padding-right: 21px;
   height: 40px;
   border-radius: 50px;
   margin-top: 10px;
@@ -161,4 +164,8 @@ export const CircularProgressContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const InputCheckBoxPaidOrRecived = styled.div`
+  width: 250px;
 `;
