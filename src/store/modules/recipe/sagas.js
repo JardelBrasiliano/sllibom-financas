@@ -127,15 +127,31 @@ export function* searchRecipe({ payload }) {
       const searchDay = dayBefore(index).split('/').join('-');
       const { extYear } = extentDate(searchDay);
 
-      const snapshot = yield call(
+      const snapshotReceived = yield call(
         rsf.firestore.getCollection,
         `/recipe/${token}/received/${extYear}/days/${searchDay}/values`,
       );
 
-      snapshot.forEach((user) => {
+      snapshotReceived.forEach((user) => {
         const recipe = {
           ...user.data().data,
           postDay: dayBefore(index),
+          id: user.id,
+          type: 'Receita',
+        };
+        listBefore7Day.push(recipe);
+      });
+
+      const snapshotLack = yield call(
+        rsf.firestore.getCollection,
+        `/recipe/${token}/lack/${extYear}/days/${searchDay}/values`,
+      );
+
+      snapshotLack.forEach((user) => {
+        const recipe = {
+          ...user.data().data,
+          postDay: dayBefore(index),
+          paidDay: '',
           id: user.id,
           type: 'Receita',
         };

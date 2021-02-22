@@ -63,12 +63,12 @@ export const BarNav = styled.ul`
     }
     &::before {
       content: '';
-      width: 120px;
+      width: 118px;
       height: 2px;
       border-radius: 50%;
       background-color: #2962ff;
       position: absolute;
-      top: 26px;
+      top: 27px;
     }
   }
 `;

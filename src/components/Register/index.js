@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { CircularProgress } from '@material-ui/core';
 import { registerRequest } from '../../store/modules/register/actions';
 
 import {
-  SocialMedia,
   Input,
   Division,
   BtnSignInOrRegister,
   InputContainer,
+  ErrorInput,
 } from '../../pages/LoginPage/style';
 
 const Cadastrar = () => {
@@ -15,7 +16,9 @@ const Cadastrar = () => {
   const [email, setEmail] = useState('');
   const [password, setpassword] = useState('');
 
-  const { loadingregisterRequest } = useSelector((state) => state.register);
+  const { loadingregisterRequest, error } = useSelector(
+    (state) => state.register,
+  );
 
   const dispatch = useDispatch();
 
@@ -25,12 +28,7 @@ const Cadastrar = () => {
 
   return (
     <>
-      <SocialMedia>
-        <button type="button">Google</button>
-        <button type="button">FaceBook</button>
-      </SocialMedia>
-
-      <Division>ou</Division>
+      <Division> </Division>
 
       <InputContainer>
         <Input>
@@ -42,7 +40,7 @@ const Cadastrar = () => {
               setName(value.target.value);
             }}
           />
-          <div />
+          <article />
         </Input>
 
         <Input>
@@ -54,7 +52,12 @@ const Cadastrar = () => {
               setEmail(value.target.value);
             }}
           />
-          <div />
+          <article />
+          <ErrorInput>
+            <p style={{ opacity: `${error ? '1' : '0'}` }}>
+              O endereço de email ou a senha que você não é válido.
+            </p>
+          </ErrorInput>
         </Input>
 
         <Input>
@@ -66,7 +69,12 @@ const Cadastrar = () => {
               setpassword(value.target.value);
             }}
           />
-          <div />
+          <article />
+          <ErrorInput>
+            <p style={{ opacity: `${error ? '1' : '0'}` }}>
+              O endereço de email ou a senha que você não é válido.
+            </p>
+          </ErrorInput>
         </Input>
       </InputContainer>
 
@@ -75,7 +83,9 @@ const Cadastrar = () => {
           CADASTRAR
         </BtnSignInOrRegister>
       ) : (
-        '...'
+        <BtnSignInOrRegister style={{ backgroundColor: '#A5A4A4' }}>
+          <CircularProgress style={{ transform: 'scale(0.7)' }} />
+        </BtnSignInOrRegister>
       )}
     </>
   );

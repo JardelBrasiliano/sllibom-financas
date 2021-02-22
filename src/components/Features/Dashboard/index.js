@@ -30,6 +30,7 @@ const Dashboard = () => {
   const { listExpenditureGraphsBar } = useSelector(
     (state) => state.expenditure,
   );
+
   const { token } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -55,9 +56,15 @@ const Dashboard = () => {
       }
       return 0;
     });
-    setRecipeCurrentMonth(+newListRecipe[totalRecipe]);
-
-    setExpenditureCurrentMonth(+listExpenditureGraphsBar[totalRecipe]);
+    setRecipeCurrentMonth(
+      +newListRecipe[totalRecipe] >= 0 ? +newListRecipe[totalRecipe] : 0,
+    );
+    console.log(newListExpen);
+    setExpenditureCurrentMonth(
+      +listExpenditureGraphsBar[totalRecipe] >= 0
+        ? +listExpenditureGraphsBar[totalRecipe]
+        : 0,
+    );
 
     setBalance(+newListRecipe[totalRecipe] - +newListExpen[totalRecipe]);
   }, [listExpenditureGraphsBar, listRecipeGraphsBar]);

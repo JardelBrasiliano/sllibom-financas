@@ -57,10 +57,15 @@ export const RecordItems = styled.ul`
     }
     > button {
       cursor: pointer;
+      background-color: transparent;
       width: 100%;
       height: 100%;
 
       border: none;
+      transition: 0.3s ease-in-out background-color;
+      &:hover {
+        background-color: rgba(147, 147, 147, 0.2);
+      }
     }
   }
 `;

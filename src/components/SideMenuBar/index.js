@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
+
+import {
+  DashboardOutlined,
+  AccountBoxOutlined,
+  EventNoteOutlined,
+  ExitToAppOutlined,
+} from '@material-ui/icons';
+
 import { logOut } from '../../store/modules/auth/actions';
 
 import ExpenditureOrRecipe from './components/ExpenditureOrRecipe';
@@ -24,7 +32,8 @@ const SideMenuBar = () => {
   const [openRecipe, setOpenRecipe] = useState(false);
 
   const dispach = useDispatch();
-
+  const { id } = useParams();
+  console.log(id === 'profile');
   const handleClick = () => {
     setOpen((prev) => !prev);
   };
@@ -86,14 +95,25 @@ const SideMenuBar = () => {
 
         <Navigation>
           <ul>
-            <li>
-              <Link to="/profile">Perfil</Link>
+            <li className={`${id.toLowerCase() === 'profile' ? 'active' : ''}`}>
+              <Link to="/profile">
+                <AccountBoxOutlined />
+                Perfil
+              </Link>
             </li>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
+            <li
+              className={`${id.toLowerCase() === 'dashboard' ? 'active' : ''}`}
+            >
+              <Link to="/dashboard">
+                <DashboardOutlined />
+                Dashboard
+              </Link>
             </li>
-            <li>
-              <Link to="/record">Relatório</Link>
+            <li className={`${id.toLowerCase() === 'record' ? 'active' : ''}`}>
+              <Link to="/record">
+                <EventNoteOutlined />
+                Relatório
+              </Link>
             </li>
             <li>
               <button
@@ -101,6 +121,7 @@ const SideMenuBar = () => {
                 type="button"
                 onClick={() => dispach(logOut())}
               >
+                <ExitToAppOutlined />
                 Sair
               </button>
             </li>

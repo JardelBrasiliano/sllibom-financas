@@ -125,27 +125,48 @@ export const Navigation = styled.nav`
 
   > ul {
     > li {
+      position: relative;
+
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+      width: 100%;
+      height: 45px;
+
+      padding-bottom: 5px;
       background-color: #fff;
 
       transition: 0.2s ease-in-out background-color;
-
+      &.active {
+        background-color: #f2f2f0;
+      }
       &:hover {
         background-color: #f2f2f0;
       }
       > a {
+        cursor: pointer;
         display: flex;
         align-items: flex-end;
         justify-content: center;
 
         width: 100%;
         height: 45px;
+        border: none;
 
-        padding-bottom: 5px;
+        background-color: transparent;
 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 18px;
-        color: black;
+        color: #939393;
         text-decoration: none;
+
+        > svg {
+          color: rgba(147, 147, 147, 0.7);
+          position: absolute;
+          bottom: 3px;
+          left: 30px;
+        }
       }
       > button {
         cursor: pointer;
@@ -157,13 +178,18 @@ export const Navigation = styled.nav`
         height: 45px;
         border: none;
 
-        padding-bottom: 5px;
         background-color: transparent;
 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 18px;
-        color: black;
+        color: #939393;
         text-decoration: none;
+        > svg {
+          color: rgba(147, 147, 147, 0.7);
+          position: absolute;
+          bottom: 3px;
+          left: 30px;
+        }
       }
     }
   }

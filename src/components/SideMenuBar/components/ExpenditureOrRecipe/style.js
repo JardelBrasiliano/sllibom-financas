@@ -233,6 +233,7 @@ export const BtnSave = styled.button`
     background: #214ecc;
   }
 `;
+
 export const ErrorInput = styled.div`
   position: absolute;
   bottom: -6px;

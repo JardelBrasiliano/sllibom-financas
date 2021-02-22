@@ -21,12 +21,14 @@ const expenditure = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loadingSignInRequest: true,
+        error: false,
       };
     case types.LOGIN.SUCCESS:
       return {
         ...state,
         loadingSignInRequest: false,
         isSignedIn: true,
+        error: false,
         user: action.payload.user,
         token: action.payload.token,
       };

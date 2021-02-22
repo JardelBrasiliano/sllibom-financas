@@ -69,8 +69,8 @@ export const Action = styled.section`
     }
 
     > img {
-      width: 400px;
-      height: 400px;
+      width: 100%;
+      height: auto;
     }
 
     > p {
@@ -82,6 +82,12 @@ export const Action = styled.section`
 
       margin-bottom: 5px;
     }
+  }
+
+  @media (max-width: 800px) {
+    opacity: 0;
+    position: absolute;
+    display: none;
   }
 `;
 
@@ -222,7 +228,7 @@ export const Input = styled.div`
 
     border: none;
   }
-  > div {
+  > article {
     content: '';
     position: absolute;
     bottom: 0;
@@ -230,6 +236,20 @@ export const Input = styled.div`
     width: 280px;
     height: 2px;
     background-color: #3f3f3f;
+  }
+`;
+
+export const ErrorInput = styled.div`
+  position: absolute;
+  bottom: -6px;
+
+  width: 90%;
+  transition: 0.3s ease-in-out opacity;
+  > p {
+    position: absolute;
+    font-family: arial;
+    font-size: 10px;
+    color: red;
   }
 `;
 
@@ -243,6 +263,8 @@ export const BtnSignInOrRegister = styled.button`
   border: none;
   border-radius: 50px;
   background: #2962ff;
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.43);
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.43);
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 17px;

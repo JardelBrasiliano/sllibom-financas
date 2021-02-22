@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { CircularProgress } from '@material-ui/core';
 import { signInRequest } from '../../store/modules/auth/actions';
 
 import {
-  SocialMedia,
   Input,
   Division,
   BtnSignInOrRegister,
   InputContainer,
+  ErrorInput,
 } from '../../pages/LoginPage/style';
 
 const Entrar = () => {
   const [email, setEmail] = useState('');
   const [password, setpassword] = useState('');
 
-  const { loadingSignInRequest } = useSelector((state) => state.auth);
+  const { loadingSignInRequest, error } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
+  const verfRegister = () => {
+    dispatch(signInRequest(email, password));
+  };
   return (
     <>
-      <SocialMedia>
-        <button type="button">Google</button>
-        <button type="button">FaceBook</button>
-      </SocialMedia>
-
-      <Division>ou</Division>
+      <Division> </Division>
 
       <InputContainer>
         <Input>
@@ -37,7 +36,12 @@ const Entrar = () => {
               setEmail(value.target.value);
             }}
           />
-          <div />
+          <article />
+          <ErrorInput>
+            <p style={{ opacity: `${error ? '1' : '0'}` }}>
+              O endereço de email ou a senha que você não é válido.
+            </p>
+          </ErrorInput>
         </Input>
 
         <Input>
@@ -49,18 +53,23 @@ const Entrar = () => {
               setpassword(value.target.value);
             }}
           />
-          <div />
+          <article />
+          <ErrorInput>
+            <p style={{ opacity: `${error ? '1' : '0'}` }}>
+              O endereço de email ou a senha que você não é válido.
+            </p>
+          </ErrorInput>
         </Input>
       </InputContainer>
 
       {!loadingSignInRequest ? (
-        <BtnSignInOrRegister
-          onClick={() => dispatch(signInRequest(email, password))}
-        >
+        <BtnSignInOrRegister onClick={() => verfRegister()}>
           ENTRAR
         </BtnSignInOrRegister>
       ) : (
-        '...'
+        <BtnSignInOrRegister style={{ backgroundColor: '#A5A4A4' }}>
+          <CircularProgress style={{ transform: 'scale(0.7)' }} />
+        </BtnSignInOrRegister>
       )}
     </>
   );
